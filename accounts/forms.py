@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth import authenticate, get_user_model
 from .choices import *
+from utility.models import Employee
 
 User = get_user_model()
 
@@ -23,19 +24,30 @@ class UserLoginForm(forms.Form):
 
 
 class UserRegisterForm(forms.ModelForm):
-    email = forms.EmailField(label='Email Address')
-    password = forms.CharField(max_length=100, widget=forms.PasswordInput)
+    Username = forms.CharField(max_length = 50)
+    FirstName = forms.CharField(max_length = 50)
+    LastName = forms.CharField(max_length = 50)
+    Email = forms.EmailField(label='Email Address')
+    Password = forms.CharField(max_length=100, widget=forms.PasswordInput)
 
     class Meta:
-        model = User
+        model = Employee
         fields = [
-            'username',
-            'email',
-            'password',
+            'Username',
+            'Email',
+            'Password',
+            'EmpID',
+            'DeptID',
+            'FirstName',
+            'LastName',
+            'DOB',
+            'Address',
+            'ContactNo',
+            'DOJ',
         ]
 
     def clean_email(self, *args, **kwargs):
-        email = self.cleaned_data.get('email')
+        email = self.cleaned_data.get('Email')
         email_qs = User.objects.filter(email = email)
         if email_qs.exists():
             raise forms.ValidationError('This email is already registered')

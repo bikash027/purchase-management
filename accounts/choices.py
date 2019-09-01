@@ -1,14 +1,16 @@
-USER_TYPES = (
-    (1,'FACULTY'),
-    (2,'ACCOUNT'),
-    (3,"DIRECTOR"),
-    (4,'PURCHASE'),
-)
 
 DESIGNATION = (
     (1,'ASSISTANT PROFESSOR'),
     (2,'ASSOCIATE PROFESSOR'),
     (3,'PROFESSOR'),
+)
+
+USER_TYPES = (
+    (1,'FACULTY'),
+    (2,'ACCOUNT'),
+    (3,'DIRECTOR'),
+    (4,'PURCHASE'),
+    (5,'REGISTRAR')
 )
 
 DEPARTMENT = (
@@ -33,12 +35,24 @@ BOOLEAN = (
 )
 
 PURCHASE_STATUS = (
-    (0, 'Purchase Request Generated'),
-    (1, 'Waiting for approval by HOD'),
-    (2, 'Approved by HOD'),
-    (3, 'Waiting for Approval by Account Section'),
-    (4, 'Approved by Account Section'),
-    (5, 'Purchase Request at Purchase Section'),
-    (6, 'Product Purchased'),
-    (7, 'Purchase denied'),
+    (0, 'Purchase Request Saved in Draft'),
+    (1, 'Purchase Request is with HOD'),
+    (2, 'Waiting for approval by HOD'),
+    (3, 'Purchase Request is in Account Section'),
+    (4, 'Waiting for Approval by Account Section'),
+    (5, 'Waiting for Approval by Registrar'),
+    (6, 'Waiting for Approval by Director'),
+    (7, 'Approved by Account Section'),
+    (8, 'Purchase Request at Purchase Section'),
+    (9, 'Product Purchased'),
+    (10, 'Purchase denied'),
 )
+
+ACADEMIC_SESSION = [
+    (2018,'2018-19'),
+    (2019,'2019-20'),
+    (2020,'2020-21'),
+    (2021,'2021-22'),
+    (2022,'2022-23'),
+    (2023,'2023-24'),
+]

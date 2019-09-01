@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, HttpResponse, reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout, authenticate, get_user_model
 from .forms import UserLoginForm, UserRegisterForm
+from utility.models import Employee
 
 User = get_user_model()
 
@@ -27,10 +28,19 @@ def register_view(request):
     next = request.GET.get('next')
     form = UserRegisterForm(request.POST or None)
     if form.is_valid():
-        user = form.save(commit = False)
-        password = form.cleaned_data.get('password')
+        user = User(username=form.cleaned_data.get('Username'),email=form.cleaned_data.get('Email'))
+        password = form.cleaned_data.get('Password')
         user.set_password(password)
         user.save()
+        employee = Employee(User = user, 
+        EmpID = form.cleaned_data.get('EmpID'),
+        DeptID = form.cleaned_data.get('DeptID'),
+        DOB = form.cleaned_data.get('DOB'),
+        Address = form.cleaned_data.get('Address'),
+        DOJ = form.cleaned_data.get('DOJ'),
+        ContactNo = form.cleaned_data.get('ContactNo'),
+        )
+        employee.save()
         login(request, user)
         if next:
             return redirect(next)
