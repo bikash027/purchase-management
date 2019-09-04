@@ -16,7 +16,9 @@ def login_view(request):
     if form.is_valid():
         username = form.cleaned_data.get('username')
         password = form.cleaned_data.get('password')
+
         user = authenticate(username=username, password=password)
+
         login(request, user)
         if next:
             return redirect(next)
@@ -28,19 +30,24 @@ def register_view(request):
     next = request.GET.get('next')
     form = UserRegisterForm(request.POST or None)
     if form.is_valid():
-        user = User(username=form.cleaned_data.get('Username'),email=form.cleaned_data.get('Email'))
-        password = form.cleaned_data.get('Password')
+        user = User(username=form.cleaned_data.get('username'),email=form.cleaned_data.get('email'))
+        password = form.cleaned_data.get('password')
         user.set_password(password)
+        user.first_name = form.cleaned_data.get('firstName')
+        user.last_name = form.cleaned_data.get('lastName')
         user.save()
-        employee = Employee(User = user, 
-        EmpID = form.cleaned_data.get('EmpID'),
-        DeptID = form.cleaned_data.get('DeptID'),
-        DOB = form.cleaned_data.get('DOB'),
-        Address = form.cleaned_data.get('Address'),
-        DOJ = form.cleaned_data.get('DOJ'),
-        ContactNo = form.cleaned_data.get('ContactNo'),
+
+        employee = Employee(
+        user = user, 
+        id = form.cleaned_data.get('id'),
+        department = form.cleaned_data.get('department'),
+        dateOfBirth = form.cleaned_data.get('dateOfBirth'),
+        address = form.cleaned_data.get('address'),
+        dateOfJoining = form.cleaned_data.get('dateOfJoining'),
+        contactNo = form.cleaned_data.get('contactNo'),
         )
         employee.save()
+
         login(request, user)
         if next:
             return redirect(next)
@@ -51,4 +58,4 @@ def register_view(request):
 def logout_view(request):
     logout(request)
     return redirect(reverse('login'))
-
+    

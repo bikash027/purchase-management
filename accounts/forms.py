@@ -22,32 +22,31 @@ class UserLoginForm(forms.Form):
 
         return super(UserLoginForm, self).clean(*args, **kwargs)
 
-
 class UserRegisterForm(forms.ModelForm):
-    Username = forms.CharField(max_length = 50)
-    FirstName = forms.CharField(max_length = 50)
-    LastName = forms.CharField(max_length = 50)
-    Email = forms.EmailField(label='Email Address')
-    Password = forms.CharField(max_length=100, widget=forms.PasswordInput)
+    username = forms.CharField(max_length = 50)
+    firstName = forms.CharField(max_length = 50)
+    lastName = forms.CharField(max_length = 50)
+    email = forms.EmailField(label='Email Address')
+    password = forms.CharField(max_length=100, widget=forms.PasswordInput)
 
     class Meta:
         model = Employee
         fields = [
-            'Username',
-            'Email',
-            'Password',
-            'EmpID',
-            'DeptID',
-            'FirstName',
-            'LastName',
-            'DOB',
-            'Address',
-            'ContactNo',
-            'DOJ',
+            'username',
+            'email',
+            'password',
+            'id',
+            'department',
+            'firstName',
+            'lastName',
+            'dateOfBirth',
+            'address',
+            'contactNo',
+            'dateOfJoining',
         ]
 
     def clean_email(self, *args, **kwargs):
-        email = self.cleaned_data.get('Email')
+        email = self.cleaned_data.get('email')
         email_qs = User.objects.filter(email = email)
         if email_qs.exists():
             raise forms.ValidationError('This email is already registered')
