@@ -69,11 +69,12 @@ class PurchaseRequest(models.Model):
     def __str__(self):
         return str(self.totalCost)+" requested by "+str(self.employee)
 
-# class AccountSection(models.Model):
-#     AccountID = models.AutoField(primary_key=True)
-#     PurchaseID = models.ForeignKey(PurchaseRequest, on_delete=models.CASCADE)
-#     MoneyGranted = models.CharField(choices = BOOLEAN, max_length=1)
-#     AccountOfficer = models.ForeignKey(Employee, on_delete=models.CASCADE)
+class Notification(models.Model):
+    id = models.AutoField(primary_key = True)
+    purchaseRequest = models.ForeignKey(PurchaseRequest, on_delete = models.CASCADE)
+    seen = models.CharField(choices = BOOLEAN, max_length = 1, default='N')
+    statusUpdate = models.IntegerField(default = 0)
+    date = models.DateTimeField(auto_now_add = True)
 
-#     def __str__(self):
-#         return "AccountID "+str(self.AccountID)
+    def __str__(self):
+        return str(self.purchaseRequest.purpose) + " status has changed to " + str(dict(PURCHASE_STATUS).get(self.statusUpdate))

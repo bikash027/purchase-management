@@ -1,0 +1,6 @@
+<p>Amount&nbsp;{{purchase_request.totalCost}}</p>
+<p>Created By &nbsp; {{employee_name}}</p>
+<p>Specification &nbsp; {{purchase_request.specification}}</p>
+<p>Current Status &nbsp; {{status}}</p>
+
+<a href="{% url 'purchase:update_status' purchase_request.id %}" >Forward to next stage</a>
