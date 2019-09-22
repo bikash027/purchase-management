@@ -1,0 +1,116 @@
+.container{
+	width:80%;
+	margin:50px auto;
+}
+#note{
+	float:left;
+	/*padding-bottom: 10px;*/
+	margin-bottom:10px;
+}
+.table1{
+	border:1px solid black;
+	background-color: black;
+	text-align: center;
+	/*position:relative;*/
+	/*top:0px;*/
+	display:grid;
+	grid-template-columns: 1fr 1fr;
+	grid-auto-rows: minmax(40px,auto);
+	grid-gap:1px;
+	/*max-width: 80%;*/
+	margin-top:15px;
+}
+input,textarea{
+	border:0;
+	width:99%;
+	height:99%;
+}
+div,p{
+	background-color: white;
+}
+.table2{
+	border:1px solid black;
+	background-color: black;
+	text-align: center;
+	/*position:relative;*/
+	/*top:0px;*/
+	display:grid;
+	grid-template-columns: 1fr 5fr 2fr 1fr 2fr;
+	grid-auto-rows: minmax(40px,auto);
+	grid-gap:1px;
+	/*max-width: 80%;*/
+	/*margin-top:15px;*/
+}
+.table2 div,.table1 div{
+	padding:5px;
+}
+img{
+	float:left;
+	margin-right:10px;
+}
+table{
+	/*width:99%;*/
+	margin:0 auto;
+	margin-top:10px;
+	border-collapse: collapse;
+}
+th,td,table{
+	border:1px solid black;
+}
+.table td{
+	width:50%;
+	padding:10px;
+}
+#button,button{
+	background-color: white;
+	height:30px;
+	border:1px solid black;
+	border-radius:5px;
+	box-shadow: 0 0 0px #11913a;
+	transition: all 50ms;
+	transition-property: box-shadow;
+}
+#button:hover,button:hover{
+	box-shadow: 0 0 5px #006eff;
+}
+button{
+	width:80px;
+}
+#id_specification{
+	height:50px;
+}
+#id_purpose{
+	height:70px;
+}
+.threeDivs{
+	margin:100px 1.66%;
+	margin-bottom: 50px;
+	float:left;
+
+}
+.one{
+	/*padding-right:20px;*/
+	width:40%;
+}
+.two,.three{
+	width:25%;
+	text-align: center;
+}
+#Approved{
+	margin-top: 300px;
+	text-align: center;
+	margin-bottom: 50px;
+}
+.divs1{
+	float:left;
+	width:70%;
+}
+.divs2{
+	float:left;
+	width:30%;
+	text-align: right;
+	margin-bottom: 50px;
+}
+#Sanctioning{
+	margin-top: 200px;
+}

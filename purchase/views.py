@@ -1,6 +1,6 @@
-from django.shortcuts import HttpResponse
+from django.shortcuts import HttpResponse,redirect
 from django.contrib.auth.decorators import login_required
 
 @login_required
 def home(request):
-    return HttpResponse("You are at home page")
+    return redirect('/purchase-request')

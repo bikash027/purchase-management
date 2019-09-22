@@ -1,0 +1,43 @@
+body{
+	background-color: white;
+}
+#container{
+	/*background-color: #59bd7d;*/
+	width:40%;
+	margin:50px auto;
+}
+label{
+	color:white;
+	padding-left: 10px;
+}
+table{
+	border-collapse: seperate;
+	border-spacing: 0 10px;
+	width:100%;
+}
+tr{
+	background-color: #59bd7d;
+}
+
+select,input{
+	height:40px;
+	width:100%;
+	border: 0px;
+	text-align: center;
+}
+textarea{
+	width:99%;
+	border:0px;
+}
+#submit{
+	background-color: #0c8a58;
+	color: white;
+	border:0px;
+	display: block;
+	margin:5px auto;
+	transform: scale(1);
+	transition-property: transform;
+}
+#submit:hover{
+	transform: scaleY(1.05) scaleX(1.01);
+}

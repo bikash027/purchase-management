@@ -1,5 +1,13 @@
-<form method="POST">
-    {% csrf_token %}
-    {{form.as_p}}
-    <input type="submit" value="login">
-</form>
+{% extends 'accounts/base.html' %}
+
+{% block content %}
+<div id='container'>
+		<form method="POST">
+		    {% csrf_token %}
+		    <table>
+		    	{{form.as_table}}
+		    </table>
+		    <input id='submit' type="submit" value="login">
+		</form>
+</div>
+{% endblock %}

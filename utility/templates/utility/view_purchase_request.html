@@ -1,6 +1,155 @@
-<p>Amount&nbsp;{{purchase_request.totalCost}}</p>
+<!-- <p>Amount&nbsp;{{purchase_request.totalCost}}</p>
 <p>Created By &nbsp; {{employee_name}}</p>
 <p>Specification &nbsp; {{purchase_request.specification}}</p>
 <p>Current Status &nbsp; {{status}}</p>
 
 <a href="{% url 'purchase:update_status' purchase_request.id %}" >Forward to next stage</a>
+ -->
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>purchase</title>
+	<link rel="stylesheet" href="{% static 'css/reques.css' %}">
+</head>
+<body>
+	<div class="container">
+		<div class='two-divs'>
+			<!-- Created by:&nbsp; -->
+			<p>
+			Created by:&nbsp;<strong>{{employee_name}}</strong>
+			</p>
+			<!-- <p>Department: {{purchase_req.DeptID.DeptID}}</p> -->
+		</div>
+		<div class='two-divs'>
+			<p id='date'>Created on:&nbsp;{{purchase_request.dateofIndent}}</p>
+			<!-- <p id='status'>Current status of the request: {{status}}</p> -->
+		</div>
+		<table>
+			<tr>
+				<td>Purpose: </td>
+				<td>{{purchase_request.purpose}}</td>
+			</tr>
+			<tr>
+				<td>Specifications: </td>
+				<td>{{purchase_request.specification}}</td>
+			</tr>
+			<tr>
+				<td>Amount: </td>
+				<td>{{purchase_request.totalCost}}</td>
+			</tr>
+			<!-- <tr>
+				<td>number of units required: </td>
+				<td>{{purchase_req.NoOfItemsReq}}</td>
+			</tr> -->
+			<!-- <p>Specifications: {{purchase_req.Specification}}</p>
+			<p>Rate per unit: {{purchase_req.RatePerUnit}}</p>
+			<p>number of units required: {{purchase_req.NoOfItemsReq}}</p> -->
+			
+		</table>
+		{% if ForwardReject == True %}
+				<p id='forward'>
+					<a href="{% url 'purchase:physical_token' purchase_request.id 'forward' %}" >Forward to next stage</a>
+				</p>
+				<!-- <form method='post' action="{% url 'purchase:update_status' purchase_request.id %}"> -->
+					<!-- {% csrf_token %} -->
+					<!-- <input type="text" name="comment" placeholder="comment for rejection"> -->
+					<button onclick="location.href='/purchase_request/token/{{purchase_request.id}}/reject';">reject</button>
+				<!-- </form> -->
+		{% endif %}
+	</div>
+	{% if accounts == True %}
+		<div class='buttons'>
+			<div id='button1'><p>stats</p></div>
+			<div id='button2'><p>request status</p></div>
+		</div>
+		<div id='stats'>
+			<!-- <div class='graph'> -->
+				<div class='dep'>
+					<div class='bar'>
+						
+					</div>
+				</div>
+				<div class='dep'>
+					<div class='bar'>
+						
+					</div>
+				</div>
+				<div class='dep'>
+					<div class='bar'>
+						
+					</div>
+				</div>
+			<!-- </div> -->
+			<div class='graph names'>
+				<div class='depNames'>
+					<p>fund remaining: <span>{{stats.fund_remaining}}</span></p>
+				</div>
+				<div class='depNames'>
+					<p>fund required: <span>{{stats.fund_required}}</span></p>
+				</div>
+				<div class='depNames'>
+					<p>fun required by all: <span>{{stats.fund_required_total}}</span></p>
+				</div>
+			</div>
+		</div>
+	{% endif %}
+	<div class='dummy'>
+		{% for log in logs %}
+			<div class='Bar'></div>
+			<div class='status'>
+				<p>{{log.changedTo}} {{log.date}}</p>
+				<p>{{log.comment}}</p>
+			</div>
+			
+		{% endfor %}
+	</div>
+	<script type="text/javascript">
+		const dummy=document.querySelector('.dummy');
+		// dummy.style.display='none';
+		dummy.lastElementChild.style.color='black';
+		dummy.lastElementChild.style.backgroundColor='white';
+		const button1=document.querySelector('#button1');
+		const button2=document.querySelector('#button2');
+		button2.style.backgroundColor='rgb(167,224,183)';
+		const stats=document.querySelector('#stats')
+		stats.style.display='none';
+		button1.addEventListener('click',function(){
+			dummy.style.display='none';
+			stats.style.display='block';
+			button1.style.backgroundColor='rgb(167,224,183)';
+			button2.style.backgroundColor='white';
+		})
+		button2.addEventListener('click',function(){
+			stats.style.display='none';
+			dummy.style.display='block';
+			button2.style.backgroundColor='rgb(167,224,183)';
+			button1.style.backgroundColor='white';
+		})
+		const bars=document.querySelectorAll('.bar');
+		const depNames=document.querySelectorAll('.depNames')
+		const numbers=[];
+		// depNames.map(function(depName){
+			// return depName.lastElementChild.textContent
+		// })
+		for(let i=0;i<3;i++){
+			numbers.push(depNames[i].lastElementChild.lastElementChild.textContent);
+			console.log(numbers[i]);
+		}
+		let max=0;
+		for(let i=0;i<3;i++){
+			numbers[i]=parseInt(numbers[i]);
+
+			if(numbers[i]>max)
+				max=numbers[i];
+		}
+		for(let i=0;i<3;i++){
+			bars[i].style.height=300*(numbers[i]/max)+'px';
+			bars[i].style.top=(400-300*(numbers[i]/max))+'px';
+		}
+		bars[0].style.backgroundColor='rgb(166,75,92)';
+		bars[1].style.backgroundColor='rgb(209,209,77)';
+		bars[2].style.backgroundColor='rgb(166,75,92)';
+	</script>
+</body>
+</html>

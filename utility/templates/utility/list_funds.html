@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/list_funds.css' %}">
+</head>
+<body>
+	<div id='container'>
+		{% for fund in funds %}
+			<div>
+				<p>Amount: {{fund.amount}}</p>
+				<p>Fund received on: {{fund.dateOfFundReceive}}</p>
+				<p>For the Financial Year: {{fund.financialYear}}</p>
+				<p>Fund Description: {{fund.fundDescription}}</p>
+				<!-- <p>{{fund.fundDistributi}}</p> -->
+				{% if fund.fundDistributed == 'N' %}
+					<p>
+						<a href="/purchase-request/distribute_fund/{{fund.id}}">
+							Distribute funds
+						</a>
+					</p>
+				{% endif %}
+				{% if fund.fundDistributed == 'Y' %}
+					<p>
+						<a href="/purchase-request">
+							Fund Distribution
+						</a>
+					</p>
+				{% endif %}
+			</div>
+		{% endfor %}
+	</div>
+</body>
+</html>

@@ -78,3 +78,12 @@ class Notification(models.Model):
 
     def __str__(self):
         return str(self.purchaseRequest.purpose) + " status has changed to " + str(dict(PURCHASE_STATUS).get(self.statusUpdate))
+
+class PurchaseReqLog(models.Model):
+    purchaseRequest=models.ForeignKey(PurchaseRequest,on_delete=models.CASCADE)
+    date=models.DateTimeField(auto_now_add= True)
+    changedTo=models.IntegerField(choices = PURCHASE_STATUS, default=1)
+    comments=models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return str(self.changedTo)+str(self.date)

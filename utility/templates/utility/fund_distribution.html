@@ -1,6 +1,62 @@
-Total available fund : {{fund_stats.amount}}
-<form method="POST">
-    {% csrf_token %}
-    {{form.as_p}}
-    <input type="submit" value="submit">
-</form>
+
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>purchase</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/form2.css' %}">
+</head>
+<body>
+<div id='formContainer'>
+		<h3>Total available fund : {{fund_stats.amount}}</h3>
+		<form method="POST">
+		    {% csrf_token %}
+		    <table>
+		    	{{form.as_table}}
+		    </table>
+		    <input id='submit' type="submit" value="submit">
+		</form>
+</div>
+</body>
+</html>
+<!-- <!DOCTYPE html>
+<html>
+<head>
+	<title>director</title>
+	<link rel="stylesheet" type="text/css" href="director.css">
+</head>
+<body>
+	<div id='container'>
+		<div id='graph'>
+			<div class='dep'>
+				<div class='bar'>
+					
+				</div>
+			</div>
+			<div class='dep'>
+				<div class='bar'>
+					
+				</div>
+			</div>
+			<div class='dep'>
+				<div class='bar'>
+					
+				</div>
+			</div>
+			<div class='dep'>
+				<div class='bar'>
+					
+				</div>
+			</div>
+		</div>
+		<div id='bottom'></div>
+		<form id='in'>
+			<input type="number" name="one">
+			<input type="number" name="two">
+			<input type="number" name="three">
+			<input type="number" name="four">
+		</form>
+	</div>
+</body>
+<script type="text/javascript" src='director.js'></script>
+</html> -->

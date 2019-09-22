@@ -1,0 +1,40 @@
+
+body{
+	background-color: #59bd7d;
+}
+#grid{
+	width:70%;
+	margin:100px auto;
+}
+.general{
+	width:30%;
+	margin:50px auto;
+}
+#grid div,.general div{
+	color:#59bd7d;
+	background-color: white;
+	font-size:3em;
+	float: left;
+	width:46%;
+	margin:5px 1%;
+	height:200px;
+	padding-left: 5px;
+	padding-right: 5px;
+	text-align: center;
+	position:relative;
+	transform: scale(1);
+	transition-property: transform;
+}
+.general div{
+	width:95%;
+}
+#grid div:hover,.general div:hover{
+	transform: scale(1.01);
+}
+#grid div span,.general div span{
+	display: inline-block;
+	width:100%;
+	position:relative;
+	top:50%;
+	transform: translate(0%,-50%);
+}

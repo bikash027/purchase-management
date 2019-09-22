@@ -7,87 +7,83 @@
 </head>
 <body>
 	<div class='container'>
-		<form action="/purchase-request/create" method="post">
-			{% csrf_token %}
-			<img style="" src="{% static 'logo.jpg' %}">
-			<p>प्रारुप संख्या / FORM NO.: NITS/FORMS/ACCTS/FINAPPV/12-13/009</p>
-			<p>राष्ट्रीय प्रौद्योगिकी संस्थान गसलचर / NATIONAL INSTITUTE OF TECHNOLOGY, SILCHAR</p>
-			<p><strong>वित्तीय स्वीकृती/FINANCIAL APPROVAL</strong></p>
-			<p>माल या सेिा की खरीद के गलए स्िीकृ गि/Approval for procurement of materials or services</p>
-			<p>गिभाि/ शाखा Deptt./Branch: {{department}} </p>	
-			<p id='note'>टिप्पणी एफ सं./NOTE: F. No</p>
-			<p style='text-align:right;'>ददनांक/ Date:{{date}}</p>
-			<div style='border:1px solid black;margin-top: 25px;'>
-				<p style='margin-top:0px;'>माल / सेिाओं के गििरण/ Description of material / services</p>
-				{{ form.specification.errors }}
-				{{ form.specification }} 
-			</div>
-			<table class='table'>
-				<tr>
-				<td style="width:50%;"><div>a) i) उद्देश्य / उपयोि गिसके गलए सामग्री / सेिा की आिश्यकिा है और अंगिम पटरणाम /Purpose / use for which the material/service required and the eventual outcome</div></td>
-				<td >
-					{{ form.specification.errors }}
-					{{ form.purpose }}
-				</td>
-				</tr>
-				<tr>
-				<td><div>ii) क्या आिश्यकिा पहले अनुमान दकया िया था /Whether requirement was projected before</div></td>
-				<td><textarea name='3' ></textarea></td>
-				</tr>
-				<tr>
-					<td><div>iii) आिश्यकिा की िात्कागलकिा /Urgency of requirement</div></td>
-					<td><textarea name='4' ></textarea></td>
-				</tr>
-				<tr>
-					<td><div>b) इस सामग्री / सेिा की िरीयिा का कारण / Reasons for preference of this material/service</div>
-					</td>
-					<td><textarea name='5' ></textarea></td>
-				</tr>
-				<tr>
-					<td><div>c) आिश्यकिा की अिगि और दकस समय के गलए आिश्यक / Period of requirement and by what time required:
-					</div></td>
-					<td><textarea name='6' ></textarea></td>
-				</tr>
-				<tr>
-					<td><div>d) प्रस्िागिि माल / सेिायें िकनीकी रूप से संभि है और पैरामीिर से गमलिा है/ /Whether material / services proposed is technically feasible and meets parameter:</div></td>
-					<td><textarea name='7' ></textarea></td>
-				</tr>
-				<tr>
-					<td><div>क्या सामग्री एक मागलकाना सामग्री है /Whether material is a proprietary material</div></td>
-					<td><textarea name='8' ></textarea></td>
-				</tr>
-				<tr>
-					<td><div>e) यदद आिश्यकिा दकसी एक गिशेष योिना / पटरयोिना के
-					गलए है - योिना / पटरयोिना का नाम/ If the requirement is
-					for a particular scheme/project – name of the Scheme/
-					Project :
-					</div></td>
-					<td><textarea name='9' ></textarea></td>
-				</tr>
-			</table>
-			<p>f) आइिम गििरण: {अिर ििह अपयााप्त है, अगिटरक्त शीि का उपयोि करें )}/Item details: {In case space is
-			insufficient, please use additional sheet(s)}</p>
-			<table class='Table'>
-				<tr>
-					<td><strong>आइिम सं./Item No.</strong></td>
-					<td><strong>सामग्री की गिगशष्टिा /Specification of Articles</strong></td>
-					<td><strong>अपेगिि संख्या / मात्रा / Number/ Qty.Required</strong></td>
-					<td><strong>प्रगि युगनि दर/ Rate per Unit</strong></td>
-					<td><strong>स्िगिक लािि / Actual Cost</strong></td>
-				</tr>
-				<tr>
-					<td><input type="text" name="10"></td>
-					<td><textarea name='11'></textarea></td>
-					<td><input type="number" name="12"></td>
-					<td><input type="number" name="13"></td>
-					<td>{{ form.totalCost }}</td>
-				</tr>
-			</table>
-			<p>g) क्या ख री द सी गम ि गन गि दा / खु ली गन गि दा या ए क ल गन गि दा के द्वा रा दक या िा ना प्र स्िा गि ि है/			whether procurement is proposed to be made by limited tender / open tender or single tender:
-			</p>
+		
+		<img style="" src="{% static 'logo.jpg' %}">
+		<p>प्रारुप संख्या / FORM NO.: NITS/FORMS/ACCTS/FINAPPV/12-13/009</p>
+		<p>राष्ट्रीय प्रौद्योगिकी संस्थान गसलचर / NATIONAL INSTITUTE OF TECHNOLOGY, SILCHAR</p>
+		<p><strong>वित्तीय स्वीकृती/FINANCIAL APPROVAL</strong></p>
+		<p>माल या सेिा की खरीद के गलए स्िीकृ गि/Approval for procurement of materials or services</p>
+		<p>गिभाि/ शाखा Deptt./Branch: {{department}} </p>	
+		<p id='note'>टिप्पणी एफ सं./NOTE: F. No</p>
+		<p style='text-align:right;'>ददनांक/ Date: {{date}}</p>
+		<div style='border:1px solid black;margin-top: 25px;'>
+			<p style='margin-top:0px;'>माल / सेिाओं के गििरण/ Description of material / services: {{post.specification}}</p>
+			 
+		</div>
+		<table class='table'>
+            <tr>
+            <td style="width:50%;">a) i) उद्देश्य / उपयोि गिसके गलए सामग्री / सेिा की आिश्यकिा है और अंगिम पटरणाम /Purpose / use for which the material/service required and the eventual outcome</td>
+            <td >{{post.purpose}}</td>
+            </tr>
+            <tr>
+            <td>ii) क्या आिश्यकिा पहले अनुमान दकया िया था /Whether requirement was projected before</td>
+            <td>{{post.3}}</td>
+            </tr>
+            <tr>
+                <td>iii) आिश्यकिा की िात्कागलकिा /Urgency of requirement</td>
+                <td>{{post.4}}</td>
+            </tr>
+            <tr>
+                <td>b) इस सामग्री / सेिा की िरीयिा का कारण / Reasons for preference of this material/service
+                </td>
+                <td>{{post.5}}</td>
+            </tr>
+            <tr>
+                <td>c) आिश्यकिा की अिगि और दकस समय के गलए आिश्यक / Period of requirement and by what time required:
+                </td>
+                <td>{{post.6}}</td>
+            </tr>
+            <tr>
+                <td>d) प्रस्िागिि माल / सेिायें िकनीकी रूप से संभि है और पैरामीिर से गमलिा है/ /Whether material / services proposed is technically feasible and meets parameter:</td>
+                <td>{{post.7}}</td>
+            </tr>
+            <tr>
+                <td>क्या सामग्री एक मागलकाना सामग्री है /Whether material is a proprietary material</td>
+                <td>{{post.8}}</td>
+            </tr>
+            <tr>
+                <td>e) यदद आिश्यकिा दकसी एक गिशेष योिना / पटरयोिना के
+                गलए है - योिना / पटरयोिना का नाम/ If the requirement is
+                for a particular scheme/project – name of the Scheme/
+                Project :
+                </td>
+                <td>{{post.9}}</td>
+            </tr>
+        </table>
+        <p>f) आइिम गििरण: {अिर ििह अपयााप्त है, अगिटरक्त शीि का उपयोि करें )}/Item details: {In case space is
+        insufficient, please use additional sheet(s)}</p>
+        <table class='Table'>
+            <tr>
+                <td><strong>आइिम सं./Item No.</strong></td>
+                <td><strong>सामग्री की गिगशष्टिा /Specification of Articles</strong></td>
+                <td><strong>अपेगिि संख्या / मात्रा / Number/ Qty.Required</strong></td>
+                <td><strong>प्रगि युगनि दर/ Rate per Unit</strong></td>
+                <td><strong>स्िगिक लािि / Actual Cost</strong></td>
+            </tr>
+            <tr>
+                <td>{{post.10}}</td>
+                <td>{{post.11}}</td>
+                <td>{{post.12}}</td>
+                <td>{{post.13}}</td>
+                <td>{{post.totalCost}}</td>
+            </tr>
+        </table>
+        <p>g) क्या ख री द सी गम ि गन गि दा / खु ली गन गि दा या ए क ल गन गि दा के द्वा रा दक या िा ना प्र स्िा गि ि है/          whether procurement is proposed to be made by limited tender / open tender or single tender:
+        </p>
+	<!-- </form> -->
 			<!-- <button>submit and continue</button> -->
-			<input id='button' type="submit" value= "submit">
-		</form>
+			<!-- <input id='button' type="submit" value= "submit"> -->
+		<!-- </form> -->
 		<br>
 		<br>
 		<p>गित्तीय सहमगि /FINANCIAL CONCURRENCE: </p>
@@ -175,7 +171,14 @@
 			</tr>
 		</table>
 		<p>ध्यान देःे कृपया अगिक िानकारी के गलए  सस्ंथान की िेबसाइि म ेंअपलोड  सस्ंथान की प्रगिगनगिमडंल का अगिकार देखें।/ Note. Pl. refer to the delegation of power of the Institute uploaded in the Institute’s website for further information. </p>
+		<button>print</button>
 	</div>
+	<script type="text/javascript">
+		const button=document.querySelector('button');
+		button.addEventListener('click',function(){
+			window.print();
+		});
+	</script>
 </body>
 </html>
 

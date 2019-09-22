@@ -1,0 +1,13 @@
+body{
+	background-color: #59bd7d;
+}
+
+#container{
+	width:40%;
+	margin:20px auto;
+}
+#container div{
+	background-color: white;
+	margin:20px 0;
+	padding: 10px;
+}

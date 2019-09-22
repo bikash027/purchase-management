@@ -1,0 +1,41 @@
+#graph{
+	height:500px;
+	width:80%;
+	border-left: 1px solid black;
+	/*border-bottom:1px solid black;*/
+}
+#bottom{
+	width:100%;
+	height:20px;
+	background-color: #21a649;
+}
+#container{
+	width:70%;
+	margin:0 auto;
+}
+.dep{
+	float:left;
+	height:inherit;
+	width:25%;
+
+}
+.bar{
+	position:relative;
+	left:80%;
+	width:20%;
+	background-color:#21a649;	
+}
+.slim{
+	left:90%;
+	width:10%;
+	top:40%;
+	height:60%;
+}
+#caption{
+	width:75%;
+	margin:0 auto;
+	min-height: 40px;
+}
+/*.caption-department{
+
+}*/

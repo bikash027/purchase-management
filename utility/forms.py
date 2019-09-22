@@ -12,6 +12,7 @@ class PurchaseRequestForm(forms.ModelForm):
         ]
 
 class PurchaseRequestFilterForm(forms.Form):
+    # purchase_request_id=forms.CharField(max_length)
     employee_id = forms.CharField(max_length = 50, required=False)
     department_id = forms.ChoiceField(choices = DEPARTMENT, required=False)
     currentStatus = forms.ChoiceField(choices = PURCHASE_STATUS, required=False)
@@ -48,6 +49,11 @@ class PurchaseRequestFilterForm(forms.Form):
         return super(PurchaseRequestFilterForm, self).clean(*args, **kwargs)
 
 class FundForm(forms.ModelForm):
+    dateOfFundReceive = forms.DateField(required=False, 
+                widget = forms.SelectDateWidget(
+                    empty_label=("Choose Year", "Choose Month", "Choose Day"),
+                    )
+                )
     def clean(self, *args, **kwargs):
         return super(FundForm, self).clean(*args, **kwargs)
         
@@ -64,3 +70,7 @@ class FundDistributionForm(forms.Form):
             self.n = n
             self.fields['department%d' %i] = forms.CharField(initial = departments[i].id, disabled = True)
             self.fields['amount%d' %i] = forms.FloatField(initial = 0.0)
+
+class TokenForm(forms.Form):
+    token = forms.IntegerField(label='token', required=True)
+    comment=forms.CharField(label='comment',required=False)

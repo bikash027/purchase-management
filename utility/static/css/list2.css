@@ -1,0 +1,144 @@
+body{
+	background-color: #59bd7d;
+}
+
+#field{
+	background-color: #d16060;
+	color:white;
+	text-align: center;
+	width:35%;
+	margin:0 auto;
+}
+#field input{
+	color:black;
+	height:100%;
+	background-color: white;
+}
+#field p{
+	display: inline-block;
+	padding: 10px;
+	margin:0;
+}
+.label{
+	background-color: white;
+	/*padding:5px;*/
+	padding:10px;
+	width:92.5%;
+	margin:0px auto;
+	/*margin-top: 50px;*/
+}
+.listItem{
+	/*border:1px solid black;*/
+	/*border-bottom:0px;*/
+	/*position: relative;*/
+    /*top: 50%;*/
+    /*transform: translate(0%, -50%);*/
+	background-color: white;
+	/*margin:5px 0 5px 0;*/
+	height:45px;
+	font-size:1.2em;
+	box-shadow: 0 0 0px #11913a;
+	transition: all 50ms;
+	transition-property: box-shadow;
+}
+.listItem:hover{
+	box-shadow: 0 0 10px black;
+	/*width:30.5%;*/
+	/*height:43px;*/
+}
+#container{
+	background-color: #9bbda4;
+	border-radius: 5px;
+	padding:5px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	width:60%;
+	margin:50px auto;
+}
+#listContainer{
+	background-color: #9bbda4;
+	border-radius: 5px;
+	padding:5px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	width:60%;
+	/*margin:2%;*/
+	float:left;
+	margin:50px 0;
+	margin-left: 5%;
+}
+#formContainer{
+	width:20%;
+	/*margin:50px 0;*/
+	float:left;
+	margin-left: 7.5%;
+	margin-right: 2.5%;
+	padding-left:2%;
+	padding-right: 2%;
+}
+#container table,#listContainer table{
+	margin:50px auto;
+	/*border:1px solid black;*/
+    border-collapse: separate;
+    border-spacing: 0 0.2em;
+}
+#container td,#listContainer td{
+	padding:7px;
+}
+#grid{
+	background-color: #9bbda4;
+	/*border-radius: 5px;*/
+	padding:5px;
+	width:80%;
+	margin:50px auto;
+	display: grid;
+	grid-template-columns: 1fr 1fr;	
+}
+/*a{*/
+	/*float:left;*/
+	/*padding-top: 40px;*/
+	/*text-decoration:none; */
+	/*color:#3f5c4b;*/
+	/*font-size:1.2em;*/
+/*}*/
+.itemContainer{
+	min-height: 70px;
+	width:95%;
+	margin:5px auto;
+}
+.item{
+	background-color: white;
+	/*position:relative;*/
+	/*top:5%;*/
+	padding:5px;
+	/*margin:10px;*/
+	transform: scale(1);
+	transition: all 50ms;
+	transition-property: transform;
+}
+.item:hover{
+	/*top:2.5%;*/
+	transform: scaleX(1.05) scaleY(1.1);
+}
+.date{
+	/*position:relative;*/
+	float:right;
+}
+.specific{
+	width:75%;
+	text-align: center;
+}
+.bar{
+	width:100%;
+	background-color: grey;
+	height:5px;
+}
+/*#department{*/
+	/*float:left;*/
+	/*margin-bottom: 0;*/
+/*}*/
+/*#status,#date{
+	margin-top: 0;
+	text-align: right;
+}
+*/

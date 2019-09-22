@@ -1,50 +1,23 @@
 from django.shortcuts import render, HttpResponse, reverse
 import django.contrib.auth.models as contrib
 from django.contrib.auth.decorators import login_required
-from .forms import PurchaseRequestForm, PurchaseRequestFilterForm, FundForm, FundDistributionForm
-from utility.models import Employee, PurchaseRequest, HOD, Fund, Department, FundDistribution, Notification
+from .forms import PurchaseRequestForm, PurchaseRequestFilterForm, FundForm, FundDistributionForm,TokenForm
+from utility.models import Employee, PurchaseRequest, HOD, Fund, Department, FundDistribution, Notification, PurchaseReqLog
 from django.utils import timezone
 from django.http import Http404, HttpResponseRedirect
-from accounts.choices import PURCHASE_STATUS
+from accounts.choices import PURCHASE_STATUS,USER_TYPES,DEPARTMENT
 
-# GENERIC FUNCTION TO FILTER PURCHASE REQUESTS
-def purchase_requests_with_filters(kwargs):
-    query_result = PurchaseRequest.objects.all()
+from .utils import * 
 
-    if 'employee_id' in kwargs and len(kwargs['employee_id'].strip(' ')) > 0:
-        query_result = query_result.filter(employee__id = kwargs['employee_id'])
-
-    if 'department_id' in kwargs:
-        # filter only if valid department is selected
-        # else all departments is selected
-        try:
-            Department.objects.get(kwargs['department_id'])
-            query_result = query_result.filter(department__id = kwargs['department_id'])
-        except:
-            pass
-
-    if 'currentStatus' in kwargs:
-        temp_result = query_result.filter(currentStatus = int(kwargs['currentStatus'][0]) )
-        for i in range(1,len(kwargs['currentStatus'])):
-            temp_result |= query_result.filter(currentStatus = int(kwargs['currentStatus'][i]) )
-        query_result = temp_result
-
-    if 'moneyGranted' in kwargs:
-        query_result = query_result.filter(moneyGranted = kwargs['moneyGranted'])
-        
-    if 'date' in kwargs:
-        query_result = query_result.filter(dateOfIndent__gte = kwargs['date'][0], dateOfIndent__lte = kwargs['date'][1])
-    
-    for x in kwargs:
-        print(x,kwargs[x])
-    
-    return query_result
 
 @login_required
 def create_purchase_request(request):
     if request.method == 'GET':
         form = PurchaseRequestForm(request.POST or None)
-        return render(request, 'utility/purchase_request.html', {'form':form})
+        employee=Employee.objects.get(user__id__exact = request.user.id)
+        department = dict(DEPARTMENT).get(employee.department.id)
+        date=timezone.now()
+        return render(request, 'utility/purchase_request.html', {'form':form,'department':department,'date':date})
 
     if request.method == 'POST':
         try:
@@ -60,11 +33,31 @@ def create_purchase_request(request):
                 log = "Purchase Request Created by on {}".format(timezone.now()),
                 )
             purchase_request.save()
-
+            purchase_request_log=PurchaseReqLog(
+                purchaseRequest=purchase_request,
+                changedTo=0
+            )
+            purchase_request_log.save()
+            department = dict(DEPARTMENT).get(employee.department.id)
+            date=timezone.now()
+            return render(request,'utility/purchase_request_pdf.html',{'post':request.POST,'department':department,'date':date})
         except:
             return HttpResponse("Failed to generate purchase request")
 
     return HttpResponse("Purchase request created")
+
+@login_required
+def dashboard_view(request):
+    employee=Employee.objects.get(user__id=request.user.id)
+    hod= HOD.objects.filter(hOD__id=employee.id,currentlyServing='Y')
+    print(hod)
+    if len(hod)!=0:
+        return render(request,'utility/dashboard.html',{'user_type':'HOD'})
+    else:
+        context={
+            'user_type':dict(USER_TYPES).get(employee.employeeType)
+        }
+        return render(request,'utility/dashboard.html',context)
 
 @login_required
 def view_purchase_request_employee(request):
@@ -72,34 +65,45 @@ def view_purchase_request_employee(request):
         purchase_requests = PurchaseRequest.objects.filter(employee__user__id = request.user.id)
     except:
         return HttpResponse("You have not created any purchase request")
-    return render(request, 'utility/view_all_purchase_requests.html', {'purchase_requests':purchase_requests})
+    # form = PurchaseRequestFilterForm()
+    return render(request, 'utility/view_all_purchase_requests.html', {'purchase_requests':purchase_requests,'formExists':False})
 
 @login_required
-def view_purchase_request_department(request):
-    employee = Employee.objects.get(user__id = request.user.id)
-    try:
-        department_query = HOD.objects.filter(hOD__id = employee.id, currentlyServing = 'Y')
-        departments = [department.department.id for department in department_query]
-    except:
-        return HttpResponse("Sorry, You don't have required previlideges to perform this action")
-    if len(departments) > 0:
-        try:
-            purchase_requests = PurchaseRequest.objects.filter(department__id = departments[0])
-            for i in range(1, len(departments)):
-                purchase_requests |= PurchaseRequest.objects.filter(department__id = departments[i])
-            return render(request, 'utility/view_all_purchase_requests.html', {'purchase_requests':purchase_requests})
-        except:
-            return HttpResponse("There are no purchase requests from your department")
+def view_purchase_request_department(request,w_or_a='waiting'):
+    purchase_requests=purchase_requests_per_user_type(request,w_or_a)
+    if purchase_requests['result']==True:
+        form = PurchaseRequestFilterForm()
+        context={'purchase_requests':purchase_requests['content'], 'form':form,'formExists': True,'form':form}
+        return render(request, 'utility/view_all_purchase_requests.html',context)
+    else:
+        return purchase_requests['content']
+        
+    
+        
 
 @login_required
 def view_purchase_request(request, id):
     try:
         purchase_requests = PurchaseRequest.objects.get(id = id)
-        user = contrib.User.objects.get(id = request.user.id)
+        user=purchase_requests.employee.user
         employee_name = user.first_name + " " + user.last_name
         status = dict(PURCHASE_STATUS).get(purchase_requests.currentStatus)
-        return render(request, 'utility/view_purchase_request.html', 
-            {'purchase_request':purchase_requests, 'employee_name':employee_name, 'status':status})
+        ar=get_request_logs(id)
+        context={'purchase_request':purchase_requests,
+             'employee_name':employee_name,
+              'status':status,
+              'logs': ar,
+              'ForwardReject':False,
+              'accounts':False}
+        button=requiresForward(id,request.user.id)
+        if button==True:
+            context['ForwardReject']=True
+            if Employee.objects.get(user__id=request.user.id).employeeType==2:
+                context['accounts']=True
+                context['stats']=get_stats_department(id)
+                # print('reached')
+            return render(request, 'utility/view_purchase_request.html', context)
+        return render(request, 'utility/view_purchase_request.html', context)
     except:
         raise Http404("No such purchase request exists")
 
@@ -109,8 +113,10 @@ def filter(request):
         form = PurchaseRequestFilterForm()
         return render(request, 'utility/purchase_request_filter.html', {'form':form})
     if request.method == 'POST':
-        purchase_requests_with_filters(request.POST)
-        return HttpResponse("Processing")
+        query_result=purchase_requests_with_filters(request.POST)
+        form = PurchaseRequestFilterForm()
+        context={'purchase_requests':query_result,'formExists': True,'form':form}
+        return render(request, 'utility/view_all_purchase_requests.html', context)
     return HttpResponse("Invalid Query")
 
 @login_required
@@ -130,10 +136,22 @@ def add_fund(request):
         return HttpResponse("Added to core fund")
 
 @login_required
+def list_funds(request):
+    employee=Employee.objects.get(user__id=request.user.id)
+    if employee.employeeType!=4:
+        return HttpResponse("you don't have access to this page")
+    try:
+        funds=Fund.objects.all()
+        return render(request,'utility/list_funds.html',{'funds':funds})
+    except:
+        return HttpResponse('no funds yet')
+
+@login_required
 def distribute_fund(request, fid):
 
     print("fid",fid)
-    form = FundDistributionForm(request.POST, n = len(Department.objects.all()))
+    n = len(Department.objects.all())
+    form = FundDistributionForm(request.POST,n=n )
     try:
         coreFund = Fund.objects.get(id = fid)
     except:
@@ -158,20 +176,49 @@ def distribute_fund(request, fid):
         else:
             return HttpResponse("Fund distribution could not be done as the total exceeds the available fund")
     
-    return render(request, 'utility/fund_distribution.html', {'form':form, 'fund_stats':coreFund})
+    return render(request, 'utility/fund_distribution.html', {'form':form, 'fund_stats':coreFund,'noOfDepts':n})
 
-@login_required
-def update_status(request, id):
+
+def update_status(request, action, id):
     purchase_request = PurchaseRequest.objects.get(id = id)
-    purchase_request.currentStatus += 1
+    purchase_request_log=PurchaseReqLog(
+            purchaseRequest=purchase_request,
+            changedTo=purchase_request.currentStatus,
+            comments=request.POST['comment']
+    )
+    if action=='forward':
+        purchase_request.currentStatus += 1
+        purchase_request_log.changedTo += 1
+    elif action=='reject':
+        purchase_request.currentStatus = 6
+        purchase_request_log.changedTo = 6
     purchase_request.save()
-
+    purchase_request_log.save()
     new_notification = Notification(purchaseRequest = purchase_request, statusUpdate = purchase_request.currentStatus)
     new_notification.save()
-  
     return HttpResponseRedirect(reverse('purchase:view_purchase_request', args=(id,)))
+
+@login_required
+def physical_token(request, id, action='forward'):
+    form = TokenForm(request.POST or None)
+    if request.method == 'GET':
+        return render(request, 'utility/purchase_request_filter.html', {'form':form})
+
+    if request.method == 'POST':
+        form=TokenForm(request.POST)
+        if form.is_valid():
+            token=form.cleaned_data['token']
+            # comment=form.cleaned_data['comment']
+            try:
+                #for now the token is the id
+                PurchaseRequest.objects.get(id=token)
+                return update_status(request,action,id)
+            except :
+                return HttpResponse('Invalid token')
 
 @login_required
 def get_all_notifications(employee_id):
     notifications = Notification.objects.filter(purchaseRequest__employee__id = employee_id).order_by('date')
     return notifications
+
+

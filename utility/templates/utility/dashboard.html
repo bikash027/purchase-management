@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" href="{% static 'css/dashBoard.css' %}">
+</head>
+<body>
+	<!-- <div id='container'> -->
+	{% if user_type == 'HOD' or user_type == 'FACULTY' %}	
+		<div id='grid'>
+			<div onclick="location.href='/purchase-request/create';"><span>NEW PURCHASE REQUEST</span></div>
+			<div onclick="location.href='/purchase-request/employee/view';">
+				<span>REQUESTS BY YOU</span>
+			</div>
+			{% if user_type == 'HOD' %}
+				<div onclick="location.href='/purchase-request/department/view/waiting';"><span>WAITING</span></div>
+				<div onclick="location.href='/purchase-request/department/view/approved';"><span>APPROVED</span></div>
+			{% endif %}
+		</div>
+	{% endif %}
+	{% if user_type == 'ACCOUNT' or user_type == 'DIRECTOR' or user_type == 'PURCHASE' or user_type == 'REGISTRAR' %}
+		<div class='general'>
+			<div onclick="location.href='/purchase-request/department/view/waiting';"><span>WAITING</span></div>
+			<div onclick="location.href='/purchase-request/department/view/approved';"><span>APPROVED</span></div>
+			{% if user_type == 'ACCOUNT' %}
+			<div onclick="location.href='/purchase-request/add_fund';"><span>ADD FUND</span></div>
+			{% endif %}
+			<!-- {% if user_type == ACCOUNT %}
+			<div onclick="location.href='/purchase-request/add_fund';"><span>ADD FUND</span></div>
+			{% endif %} -->
+			{% if user_type == 'DIRECTOR' %}
+			<div onclick="location.href='/purchase-request/list_funds';"><span>DISTRIBUTE FUNDS</span></div>
+			{% endif %}
+		</div>
+	{% endif %}
+	<!-- </div> -->
+</body>
+</html>

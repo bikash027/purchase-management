@@ -1,0 +1,58 @@
+body{
+	background-color: white;
+}
+#formContainer{
+	width:40%;
+	margin:50px auto;
+	background-color: white;
+	/*float:left;*/
+}
+label{
+	color:white;
+	padding-left: 10px;
+}
+h3{
+	text-align: center;
+}
+h2{
+	text-align: center;
+	/*color:white;*/
+	margin: 10px;
+}
+#formContainer table{
+	border-collapse: seperate;
+	border-spacing: 0 10px;
+	width:100%;
+}
+#formContainer tr{
+	background-color: #59bd7d;
+}
+
+select,input{
+	height:40px;
+	width:100%;
+	border: 0px;
+	text-align: center;
+}
+textarea{
+	width:99%;
+	border:0px;
+}
+ul{
+	background-color: white;
+	margin:0;
+	padding-top: 16px;
+	padding-bottom: 16px;
+}
+#submit{
+	background-color: #0c8a58;
+	color: white;
+	border:0px;
+	display: block;
+	margin:5px auto;
+	transform: scale(1);
+	transition-property: transform;
+}
+#submit:hover{
+	transform: scaleY(1.05) scaleX(1.01);
+}
