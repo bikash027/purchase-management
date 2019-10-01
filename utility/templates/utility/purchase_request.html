@@ -11,69 +11,69 @@
 			{% csrf_token %}
 			<img style="" src="{% static 'logo.jpg' %}">
 			<p>प्रारुप संख्या / FORM NO.: NITS/FORMS/ACCTS/FINAPPV/12-13/009</p>
-			<p>राष्ट्रीय प्रौद्योगिकी संस्थान गसलचर / NATIONAL INSTITUTE OF TECHNOLOGY, SILCHAR</p>
+			<p>राष्ट्रीय प्रौद्योगिकी संस्थान सिलचर / NATIONAL INSTITUTE OF TECHNOLOGY, SILCHAR</p>
 			<p><strong>वित्तीय स्वीकृती/FINANCIAL APPROVAL</strong></p>
-			<p>माल या सेिा की खरीद के गलए स्िीकृ गि/Approval for procurement of materials or services</p>
-			<p>गिभाि/ शाखा Deptt./Branch: {{department}} </p>	
+			<p>माल या सेवा की खरीद के लिए स्वीकृति/Approval for procurement of materials or services</p>
+			<p>विभाग/ शाखा Deptt./Branch: {{department}} </p>	
 			<p id='note'>टिप्पणी एफ सं./NOTE: F. No</p>
-			<p style='text-align:right;'>ददनांक/ Date:{{date}}</p>
+			<p style='text-align:right;'>दिनांक/ Date:{{date}}</p>
 			<div style='border:1px solid black;margin-top: 25px;'>
-				<p style='margin-top:0px;'>माल / सेिाओं के गििरण/ Description of material / services</p>
+				<p style='margin-top:0px;'>माल / सेवाओं के विवरण/ Description of material / services</p>
 				{{ form.specification.errors }}
 				{{ form.specification }} 
 			</div>
 			<table class='table'>
 				<tr>
-				<td style="width:50%;"><div>a) i) उद्देश्य / उपयोि गिसके गलए सामग्री / सेिा की आिश्यकिा है और अंगिम पटरणाम /Purpose / use for which the material/service required and the eventual outcome</div></td>
+				<td style="width:50%;"><div>a) i) उद्देश्य / उपयोग जिसके लिए सामग्री / सेवा की आवश्यकता है और अंतिम परिणाम /Purpose / use for which the material/service required and the eventual outcome</div></td>
 				<td >
 					{{ form.specification.errors }}
 					{{ form.purpose }}
 				</td>
 				</tr>
 				<tr>
-				<td><div>ii) क्या आिश्यकिा पहले अनुमान दकया िया था /Whether requirement was projected before</div></td>
+				<td><div>ii) क्या आवश्यकता पहले अनुमान किया गया था /Whether requirement was projected before</div></td>
 				<td><textarea name='3' ></textarea></td>
 				</tr>
 				<tr>
-					<td><div>iii) आिश्यकिा की िात्कागलकिा /Urgency of requirement</div></td>
+					<td><div>iii) आवश्यकता की तात्कालिकता /Urgency of requirement</div></td>
 					<td><textarea name='4' ></textarea></td>
 				</tr>
 				<tr>
-					<td><div>b) इस सामग्री / सेिा की िरीयिा का कारण / Reasons for preference of this material/service</div>
+					<td><div>b) इस सामग्री / सेवा की वरीयता का कारण / Reasons for preference of this material/service</div>
 					</td>
 					<td><textarea name='5' ></textarea></td>
 				</tr>
 				<tr>
-					<td><div>c) आिश्यकिा की अिगि और दकस समय के गलए आिश्यक / Period of requirement and by what time required:
+					<td><div>c) आवश्यकता की अवधि और किस समय के लिए आवश्यक / Period of requirement and by what time required:
 					</div></td>
 					<td><textarea name='6' ></textarea></td>
 				</tr>
 				<tr>
-					<td><div>d) प्रस्िागिि माल / सेिायें िकनीकी रूप से संभि है और पैरामीिर से गमलिा है/ /Whether material / services proposed is technically feasible and meets parameter:</div></td>
+					<td><div>d) प्रस्तावित माल / सेवायें तकनीकी रूप से संभव है और पैरामीटर से मिलता है/ /Whether material / services proposed is technically feasible and meets parameter:</div></td>
 					<td><textarea name='7' ></textarea></td>
 				</tr>
 				<tr>
-					<td><div>क्या सामग्री एक मागलकाना सामग्री है /Whether material is a proprietary material</div></td>
+					<td><div>क्या सामग्री एक मालिकाना सामग्री है /Whether material is a proprietary material</div></td>
 					<td><textarea name='8' ></textarea></td>
 				</tr>
 				<tr>
-					<td><div>e) यदद आिश्यकिा दकसी एक गिशेष योिना / पटरयोिना के
-					गलए है - योिना / पटरयोिना का नाम/ If the requirement is
+					<td><div>e) यदि आवश्यकता किसी एक विशेष योजना / परियोजना के
+					लिए है - योजना / परियोजना का नाम/ If the requirement is
 					for a particular scheme/project – name of the Scheme/
 					Project :
 					</div></td>
 					<td><textarea name='9' ></textarea></td>
 				</tr>
 			</table>
-			<p>f) आइिम गििरण: {अिर ििह अपयााप्त है, अगिटरक्त शीि का उपयोि करें )}/Item details: {In case space is
+			<p>f) आइटम विवरण: {अगर जगह अपयास है, अतिरक्त शीट का उपयोग करें }/Item details: {In case space is
 			insufficient, please use additional sheet(s)}</p>
 			<table class='Table'>
 				<tr>
-					<td><strong>आइिम सं./Item No.</strong></td>
-					<td><strong>सामग्री की गिगशष्टिा /Specification of Articles</strong></td>
-					<td><strong>अपेगिि संख्या / मात्रा / Number/ Qty.Required</strong></td>
-					<td><strong>प्रगि युगनि दर/ Rate per Unit</strong></td>
-					<td><strong>स्िगिक लािि / Actual Cost</strong></td>
+					<td><strong>आइटम सं./Item No.</strong></td>
+					<td><strong>सामग्री की विशिष्टता /Specification of Articles</strong></td>
+					<td><strong>अपेक्खित संख्या / मात्रा / Number/ Qty.Required</strong></td>
+					<td><strong>प्रति युनिट दर/ Rate per Unit</strong></td>
+					<td><strong>वास्तविक लागत / Actual Cost</strong></td>
 				</tr>
 				<tr>
 					<td><input type="text" name="10"></td>
@@ -83,20 +83,20 @@
 					<td>{{ form.totalCost }}</td>
 				</tr>
 			</table>
-			<p>g) क्या ख री द सी गम ि गन गि दा / खु ली गन गि दा या ए क ल गन गि दा के द्वा रा दक या िा ना प्र स्िा गि ि है/			whether procurement is proposed to be made by limited tender / open tender or single tender:
+			<p>g) क्या खरीद सीमित  निविदा / खुली निविदा या एकल निविदा के द्वारा किया जाना प्रस्तावित है/			whether procurement is proposed to be made by limited tender / open tender or single tender:
 			</p>
 			<!-- <button>submit and continue</button> -->
 			<input id='button' type="submit" value= "submit">
 		</form>
 		<br>
 		<br>
-		<p>गित्तीय सहमगि /FINANCIAL CONCURRENCE: </p>
+		<p>वित्तीय सहमति /FINANCIAL CONCURRENCE: </p>
 		<table>
 			<tr>
-				<th style="width:30%;">गशषा के िहि बिि /Budget under Head </th>
-				<th style="width:20%;">आभी िक व्यय/ Expenditure Till Date</th>
-				<th style="width:20%;">शषे रागश उपलब्ि/ Balance available</th>
-				<th style="width:30%;">िन उपलब्ि / उपलब्ि नहीं / Funds Available/Not Available </th>
+				<th style="width:30%;">शिर्ष के बजट /Budget under Head </th>
+				<th style="width:20%;">आभी तक व्यय/ Expenditure Till Date</th>
+				<th style="width:20%;">शेष राशि उपलब्ध/ Balance available</th>
+				<th style="width:30%;">धन उपलब्ध / उपलब्ध नहीं / Funds Available/Not Available </th>
 			</tr>
 			<tr>
 				<td style="height: 150px;"></td>
@@ -105,76 +105,76 @@
 				<td></td>
 			</tr>
 		</table>
-		<p>आिश्यकिा को स्िीकार करन ेके गलए गिभािाध्यि के माध्यम से प्रस्िुि/ Submitted through HOD for accepting necessity</p>
+		<p>आवश्यकता को स्वीकार करने के लिए विभागाध्यक्ष के माध्यम से प्रस्तुत/ Submitted through HOD for accepting necessity</p>
 		<!-- <div> -->
 			<div class='threeDivs one'>
-				<p>कमाचारी का हस्िािर/Signature of Employee</p>
+				<p>कर्मचारी का हस्ताक्षर/Signature of Employee</p>
 				<p>नाम/ Name: ______________________________</p>
 				<p>पदनाम/Designation: ______________________</p>
 			</div>
 			<div class='threeDivs two'>
-				<p> संयोिक/गिभािाध्यि/ </p>
+				<p> संयोजक/विभागाध्यक्ष/ </p>
 				<p> Coordinator / HOD </p>
 			</div>
 			<div class='threeDivs three'>
-				<p> उप-कु लसगच ि( लेखा) </p>
+				<p> उप-कुलसचिव (लेखा) </p>
 				<p> D.R. (Accts) </p>
 				<!-- <p></p> -->
 			</div>
 		<!-- </div> -->
-		<p id='Approved'>स्िीकृि / स्िीकृि नहीं/Approved/Not Approved</p>
+		<p id='Approved'>स्वीकृत / स्वीकृत नहीं/Approved/Not Approved</p>
 		<div class='divs1'>
-			<p>गिभािाध्यि/ डीन/ अध्यि/ HOD/Dean/Chairman</p>
+			<p>विभागाध्यक्ष/ डीन/ अध्यक्ष/ HOD/Dean/Chairman</p>
 			<p>नाम/ Name: _____________________________</p>
 			<p>पदनाम/Designation: _____________________</p>
 		</div>
 		<div class='divs2'>
 			<p>गनदशेक/ Director </p>
 		</div>
-		<h3 id='Sanctioning'>मिंुरकारी अगिकारी/ Sanctioning Authority:- </h3>
+		<h3 id='Sanctioning'>मंजुरकारी अधिकारी/ Sanctioning Authority:- </h3>
 		<table>
 			<tr>
-				<td>गिभािाध्यि / HOD </td>
-				<td>योिना बिि/ Plan Budget </td>
-				<td>एक गित्तीय िषा में रुपये 1 लाख से अगिकिम रुपये 5 लाख /Rs. 1 lakhs subject to max. of Rs.5 lakhs in a financial year</td>
+				<td>विभागाध्यक्ष / HOD </td>
+				<td>योजना बजट/ Plan Budget </td>
+				<td>एक वित्तीय वर्ष में रुपये 1 लाख से अधिकतम रुपये 5 लाख /Rs. 1 lakhs subject to max. of Rs.5 lakhs in a financial year</td>
 			</tr>
 			<tr>
-				<td>गिभािाध्यि / HOD </td>
-				<td>िैर योिना बिि/ Non-Plan Budget </td>
-				<td>एक गित्तीय िषा म ेंरुपये 15000/- से अगिकिम रुपये 3 लाख / Rs. 15000/- subject to maximum of Rs. 3 lakh in a financial year </td>
+				<td>विभागाध्यक्ष / HOD </td>
+				<td>गैर योजना बजट/ Non-Plan Budget </td>
+				<td>एक गित्तीय वर्ष में रुपये 15000/- से अधिकतम रुपये 3 लाख / Rs. 15000/- subject to maximum of Rs. 3 lakh in a financial year </td>
 			</tr>
 			<tr>
 				<td>डीन आर एण्ड सी/ Dean R&C</td>
-				<td>प्रायोगिि पटरयोिनाओं, योिनाओं और कंसल्िेंसी कोष से संबंगिि व्यय/  Expenditure related to Sponsored Projects, Schemes and Consultancy Fund </td>
-				<td>रु.10,00,000/- िक/ Up to Rs. 10,00,000/-</td>
+				<td>प्रायोजित परियोजनाओं, योजनाओं और कंसल्टेंसी कोष से संबंधित व्यय/  Expenditure related to Sponsored Projects, Schemes and Consultancy Fund </td>
+				<td>रु.10,00,000/- तक/ Up to Rs. 10,00,000/-</td>
 			</tr>
 			<tr>
 				<td>सभी डीन्स/ All Deans </td>
-				<td>गिगशष्ट प्रयोिनों के गलए / For Specific Purposes </td>
-				<td>रु. 1,00,000/-िक/ Up to Rs. 1,00,000/- </td>
+				<td>विशिष्ट प्रयोजनों के लिए / For Specific Purposes </td>
+				<td>रु. 1,00,000/-तक/ Up to Rs. 1,00,000/- </td>
 			</tr>
 			<tr>
-				<td>अध्यि, पुस्िकालय सगमगि/ Chairman, Library Committee </td>
-				<td>दकिाबें, पगत्रकाएं और अन्य उपभोक्ता िस्िुओं की खरीद के गलए / For Purchase of books, journals and other consumables </td>
-				<td>रु. 1,00,000/-िक/ Up to Rs. 1,00,000/- </td>
+				<td>अध्यक्ष, पुस्तकालय समिति/ Chairman, Library Committee </td>
+				<td>किताबें, पत्रिकाएं और अन्य उपभोक्ता वस्तुओं की खरीद के लिए / For Purchase of books, journals and other consumables </td>
+				<td>रु. 1,00,000/-तक/ Up to Rs. 1,00,000/- </td>
 			</tr>
 			<tr>
-				<td>अध्यि, स्िास््य़ केन्र/  Chairman , Health Centre</td>
-				<td>स्िास््य केन्र से संबंगिि दिायें, उपकरण ि अन्य की खरीद   के गलए खचा / For purchase of medicines, equipment & other related expenditure of Health Centre </td>
-				<td>रु. 1,00,000/-िक/ Up to Rs. 1,00,000/- </td>
+				<td>अध्यक्ष, स्वास्थ्य़ केन्द्र/  Chairman , Health Centre</td>
+				<td>स्वास्थ्य़ केन्द्र से संबंधित दवायें, उपकरण व अन्य की खरीद   के लिए खर्च / For purchase of medicines, equipment & other related expenditure of Health Centre </td>
+				<td>रु. 1,00,000/-तक/ Up to Rs. 1,00,000/- </td>
 			</tr>
 			<tr>
-				<td>कुलसगचि/ Registrar </td>
-				<td>गिभािों के गलए उपकरण, िदी, उपभोज्य, पुिे और  सहायक उपकरण की खरीद / Purchase of Equipment, uniform, consumables, spares and </td>
-				<td>रु. 50,000/-िक/ Up to Rs. 50,000/- </td>
+				<td>कुलसचिव/ Registrar </td>
+				<td>विभागों के लिए उपकरण, वर्दी, उपभोज्य, पुर्जे और  सहायक उपकरण की खरीद / Purchase of Equipment, uniform, consumables, spares and </td>
+				<td>रु. 50,000/-तक/ Up to Rs. 50,000/- </td>
 			</tr>
 			<tr>
-				<td>गनदशेक/ Director</td>
-				<td>योिना और िैर-योिना मद के िहि व्यय / Expenditure under Plan & Non-Plan Hea</td>
-				<td>एक गित्तीय िषा में रुपय े1 कडोर से अगिकिम रुपय े20 कडोर िक/ Up to Rs. 1 crore subject to Maxof Rs. 20 crore in a financial year</td>
+				<td>निदेशक/ Director</td>
+				<td>योजना और गैर-योजना मद के तहत व्यय / Expenditure under Plan & Non-Plan Hea</td>
+				<td>एक गित्तीय वर्ष में रुपये 1 कड़ोर से अधिकतम रुपय 20 कड़ोर तक/ Up to Rs. 1 crore subject to Maxof Rs. 20 crore in a financial year</td>
 			</tr>
 		</table>
-		<p>ध्यान देःे कृपया अगिक िानकारी के गलए  सस्ंथान की िेबसाइि म ेंअपलोड  सस्ंथान की प्रगिगनगिमडंल का अगिकार देखें।/ Note. Pl. refer to the delegation of power of the Institute uploaded in the Institute’s website for further information. </p>
+		<p>ध्यान देः कृपया अधिक जानकारी के लिए  सस्ंथान की वेबसाइट में अपलोड सस्ंथान की प्रतिनिधिमडंल का अधिकार देखें।/ Note. Pl. refer to the delegation of power of the Institute uploaded in the Institute’s website for further information. </p>
 	</div>
 </body>
 </html>
