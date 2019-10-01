@@ -50,12 +50,15 @@ def create_purchase_request(request):
 def dashboard_view(request):
     employee=Employee.objects.get(user__id=request.user.id)
     hod= HOD.objects.filter(hOD__id=employee.id,currentlyServing='Y')
-    print(hod)
+    notifications = get_all_notifications(employee.id)
     if len(hod)!=0:
-        return render(request,'utility/dashboard.html',{'user_type':'HOD'})
+        return render(request,'utility/dashboard.html',
+        {'user_type':'HOD','notifications':notifications,}
+        )
     else:
         context={
-            'user_type':dict(USER_TYPES).get(employee.employeeType)
+            'user_type':dict(USER_TYPES).get(employee.employeeType),
+            'notifications':notifications,
         }
         return render(request,'utility/dashboard.html',context)
 
@@ -77,8 +80,6 @@ def view_purchase_request_department(request,w_or_a='waiting'):
         return render(request, 'utility/view_all_purchase_requests.html',context)
     else:
         return purchase_requests['content']
-        
-    
         
 
 @login_required
@@ -148,8 +149,6 @@ def list_funds(request):
 
 @login_required
 def distribute_fund(request, fid):
-
-    print("fid",fid)
     n = len(Department.objects.all())
     form = FundDistributionForm(request.POST,n=n )
     try:
@@ -178,7 +177,7 @@ def distribute_fund(request, fid):
     
     return render(request, 'utility/fund_distribution.html', {'form':form, 'fund_stats':coreFund,'noOfDepts':n})
 
-
+@login_required
 def update_status(request, action, id):
     purchase_request = PurchaseRequest.objects.get(id = id)
     purchase_request_log=PurchaseReqLog(
@@ -186,9 +185,25 @@ def update_status(request, action, id):
             changedTo=purchase_request.currentStatus,
             comments=request.POST['comment']
     )
+    employee=Employee.objects.get(user__id=request.user.id)
     if action=='forward':
-        purchase_request.currentStatus += 1
-        purchase_request_log.changedTo += 1
+        if employee.employeeType == 1:
+            purchase_request.currentStatus = 1
+            purchase_request_log.changedTo = 1
+        elif employee.employeeType == 2:
+            purchase_request.currentStatus = 2
+            purchase_request_log.changedTo = 2
+        elif employee.employeeType == 3:
+            purchase_request.currentStatus = 3
+            purchase_request_log.changedTo = 3
+        elif employee.employeeType == 4:
+            purchase_request.currentStatus = 4
+            purchase_request_log.changedTo = 4
+        elif employee.employeeType == 5:
+            purchase_request.currentStatus = 5
+            purchase_request_log.changedTo = 5
+        else:
+            return HttpResponse("Sorry, you don't have priviledege to perform this action")
     elif action=='reject':
         purchase_request.currentStatus = 6
         purchase_request_log.changedTo = 6
@@ -216,9 +231,12 @@ def physical_token(request, id, action='forward'):
             except :
                 return HttpResponse('Invalid token')
 
-@login_required
 def get_all_notifications(employee_id):
     notifications = Notification.objects.filter(purchaseRequest__employee__id = employee_id).order_by('date')
-    return notifications
+    notif_list = [(str(x),x.purchaseRequest.id) for x in notifications]
+    return notif_list
 
-
+@login_required
+def view_notification(request,id):
+    Notification.objects.filter(purchaseRequest__id = id).seen = 'Y'
+    return HttpResponseRedirect(reverse('purchase:view_purchase_request', args=(id,)))

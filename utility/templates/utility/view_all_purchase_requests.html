@@ -23,7 +23,7 @@
 	</div>
 	<div id='formContainer'>
 		<h2 style="text-align: center;">Search or Filter</h2>
-		<form method="POST" action="/purchase_request/filter/{{purchase_request.id}}">
+		<form method="POST" action="/purchase-request/filter">
 		    {% csrf_token %}
 		    <table>
 		    	{{form.as_table}}

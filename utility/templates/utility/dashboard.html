@@ -34,6 +34,17 @@
 			{% endif %}
 		</div>
 	{% endif %}
+
+	<div id='notification' style="position:fixed; top:50%; left:10%; width:20%;height:30%; overflow:scroll;visibility: initial;">
+		<list>
+		{% for description,id in notifications %}
+		<ul style="background: black; ">
+			<a href="{% url 'purchase:view_notification' id %}" style="color:white; text-decoration:none; margin:3px auto 2px auto;">{{description}}</a>
+		</ul>
+		{% endfor %}
+		</list>
+		
+	</div>
 	<!-- </div> -->
 </body>
 </html>
