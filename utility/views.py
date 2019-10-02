@@ -127,11 +127,14 @@ def add_fund(request):
     form = FundForm(request.POST or None)
     if request.method == 'GET':
         return render(request, 'utility/purchase_request_filter.html', {'form':form})
-    
     if request.method == 'POST':
         new_fund = Fund(
             amount = form.data.get('amount'),
-            dateOfFundReceive = form.data.get('dateOfFundReceive'),
+            dateOfFundReceive = datetime.datetime(
+                int(form.data.get('dateOfFundReceive_year')),
+                int(form.data.get('dateOfFundReceive_month')),
+                int(form.data.get('dateOfFundReceive_day')),
+            ),
             financialYear = form.data.get('financialYear'),
             fundDescription = form.data.get('fundDescription'),
         )
