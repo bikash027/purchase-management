@@ -23,11 +23,17 @@ def create_purchase_request(request):
         try:
             employee = Employee.objects.get(user__id__exact = request.user.id)
             department = employee.department
-            
             purchase_request = PurchaseRequest(
-                purpose = request.POST['purpose'], 
-                specification = getHTML(request),
+                purpose = request.POST['purpose'],
+                requirementProjection = request.POST['requirementProjection'],
+                requirementUrgency = request.POST['requirementUrgency'],
+                preferenceReason = request.POST['preferenceReason'],
+                requirementPeriod = request.POST['requirementPeriod'],
+                feasible = request.POST['feasible'],
+                proprietary = request.POST['proprietary'],
+                scheme = request.POST['scheme'],
                 totalCost = request.POST['totalCost'],
+                specification = getHTML(request),
                 description = request.POST['description'],
                 employee = employee,
                 department = department,
@@ -45,7 +51,7 @@ def create_purchase_request(request):
             return render(request,'utility/purchase_request_pdf.html',context)
         except:
             return HttpResponse("Failed to generate purchase request")
-
+        
     return HttpResponse("Purchase request created")
 
 @login_required

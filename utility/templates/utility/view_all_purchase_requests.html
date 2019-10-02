@@ -34,7 +34,7 @@
 				<div class='itemContainer'>
 					<div class='item' onclick="location.href='{% url 'purchase:view_purchase_request' purchase_request.id %}';">
 						<p class='date'>{{purchase_request.dateofIndent}}</p>
-						<p class='specific'>{{purchase_request.specification}}</p>
+						<p class='specific'>{{purchase_request.description}}</p>
 					</div>
 				</div>
 			{% endfor %}	

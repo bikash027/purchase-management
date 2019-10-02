@@ -57,9 +57,16 @@ class FundDistribution(models.Model):
 class PurchaseRequest(models.Model):
     id = models.AutoField(primary_key=True, blank=False, null=False)
     dateofIndent = models.DateField(auto_now_add=True)
-    purpose = models.TextField()
-    specification = models.TextField()
+    purpose = models.CharField(max_length = 500, default='No purpose specified')
+    requirementProjection = models.CharField(max_length = 500,  default='No')
+    requirementUrgency = models.CharField(max_length = 500, default='Not Urgent')
+    preferenceReason = models.CharField(max_length = 500, default='No reason specified')
+    requirementPeriod = models.CharField(max_length = 500, default='1 year')
+    feasible = models.CharField(max_length = 500, default='Yes')
+    proprietary = models.CharField(max_length = 500, default='No')
+    scheme = models.CharField(max_length = 500, default='No Scheme')
     totalCost = models.FloatField(default = 0)
+    specification = models.TextField()
     description = models.TextField(default = 'description missing')
     currentStatus = models.IntegerField(choices = PURCHASE_STATUS, default=0)
     employee = models.ForeignKey(Employee, on_delete = models.CASCADE)
@@ -68,7 +75,7 @@ class PurchaseRequest(models.Model):
     log = models.TextField()
 
     def __str__(self):
-        return str(self.totalCost)+" requested by "+str(self.employee)
+        return str(self.description)+" requested by "+str(self.employee)
 
 class Notification(models.Model):
     id = models.AutoField(primary_key = True)

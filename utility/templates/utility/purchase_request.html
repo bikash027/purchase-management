@@ -9,7 +9,7 @@
 	<div class='container'>
 		<form action="/purchase-request/create" method="post" onsubmit="return validate()">
 			{% csrf_token %}
-			<img style="" src="{% static 'logo.jpg' %}">
+			<img src="{% static 'logo.jpg' %}">
 			<p>प्रारुप संख्या / FORM NO.: NITS/FORMS/ACCTS/FINAPPV/12-13/009</p>
 			<p>राष्ट्रीय प्रौद्योगिकी संस्थान सिलचर / NATIONAL INSTITUTE OF TECHNOLOGY, SILCHAR</p>
 			<p><strong>वित्तीय स्वीकृती/FINANCIAL APPROVAL</strong></p>
@@ -24,37 +24,37 @@
 			</div>
 			<table class='table'>
 				<tr>
-				<td style="width:50%;"><div>a) i) उद्देश्य / उपयोग जिसके लिए सामग्री / सेवा की आवश्यकता है और अंतिम परिणाम /Purpose / use for which the material/service required and the eventual outcome</div></td>
+				<td><div>a) i) उद्देश्य / उपयोग जिसके लिए सामग्री / सेवा की आवश्यकता है और अंतिम परिणाम /Purpose / use for which the material/service required and the eventual outcome</div></td>
 				<td >
 					<!-- {{ form.specification.errors }} -->
-					{{ form.purpose }}
+					<textarea name='purpose' ></textarea>
 				</td>
 				</tr>
 				<tr>
 				<td><div>ii) क्या आवश्यकता पहले अनुमान किया गया था /Whether requirement was projected before</div></td>
-				<td><textarea name='3' ></textarea></td>
+				<td><textarea name='requirementProjection' ></textarea></td>
 				</tr>
 				<tr>
 					<td><div>iii) आवश्यकता की तात्कालिकता /Urgency of requirement</div></td>
-					<td><textarea name='4' ></textarea></td>
+					<td><textarea name='requirementUrgency' ></textarea></td>
 				</tr>
 				<tr>
 					<td><div>b) इस सामग्री / सेवा की वरीयता का कारण / Reasons for preference of this material/service</div>
 					</td>
-					<td><textarea name='5' ></textarea></td>
+					<td><textarea name='preferenceReason' ></textarea></td>
 				</tr>
 				<tr>
 					<td><div>c) आवश्यकता की अवधि और किस समय के लिए आवश्यक / Period of requirement and by what time required:
 					</div></td>
-					<td><textarea name='6' ></textarea></td>
+					<td><textarea name='requirementPeriod' ></textarea></td>
 				</tr>
 				<tr>
 					<td><div>d) प्रस्तावित माल / सेवायें तकनीकी रूप से संभव है और पैरामीटर से मिलता है/ /Whether material / services proposed is technically feasible and meets parameter:</div></td>
-					<td><textarea name='7' ></textarea></td>
+					<td><textarea name='feasible' ></textarea></td>
 				</tr>
 				<tr>
 					<td><div>क्या सामग्री एक मालिकाना सामग्री है /Whether material is a proprietary material</div></td>
-					<td><textarea name='8' ></textarea></td>
+					<td><textarea name='proprietary' ></textarea></td>
 				</tr>
 				<tr>
 					<td><div>e) यदि आवश्यकता किसी एक विशेष योजना / परियोजना के
@@ -62,7 +62,7 @@
 					for a particular scheme/project – name of the Scheme/
 					Project :
 					</div></td>
-					<td><textarea name='9' ></textarea></td>
+					<td><textarea name='scheme' ></textarea></td>
 				</tr>
 			</table>
 			<p>f) आइटम विवरण: {अगर जगह अपयास है, अतिरक्त शीट का उपयोग करें }/Item details: {In case space is
