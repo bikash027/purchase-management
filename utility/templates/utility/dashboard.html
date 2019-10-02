@@ -5,19 +5,33 @@
 	<!-- <div id='dashboard'> -->
 	{% if user_type == 'HOD' or user_type == 'FACULTY' %}	
 		<div id='grid'>
-			<div onclick="location.href='/purchase-request/create';"><span>New Purchase Request</span></div>
+			<div onclick="location.href='/purchase-request/create';"><span>Create Purchase Request</span></div>
 			<div onclick="location.href='/purchase-request/employee/view';">
-				<span>All Requests</span>
+				<span>My Requests</span>
 			</div>
 			{% if user_type == 'HOD' %}
-				<div onclick="location.href='/purchase-request/department/view/waiting';"><span>In Process</span></div>
+				<div onclick="location.href='/purchase-request/department/view/waiting';"><span>Waiting for approval</span></div>
 				<div onclick="location.href='/purchase-request/department/view/approved';"><span>Approved</span></div>
 			{% endif %}
+		</div>
+
+		<div class="arrow2"></div>
+		<div id='notbutton'>
+			<span>Notifications</span>
+		</div>
+		<div id='notification' style="position:fixed; top:33vh; left:86vw; width:14vw;height:30%; overflow-y:scroll;visibility: hidden;">
+			<ul>
+			{% for description,id in notifications %}
+			<li style="background: white; ">
+				<a href="{% url 'purchase:view_notification' id %}" style="color:#59bd7d; text-decoration:none; margin:3px auto 2px auto;">{{description}}</a>
+			</li>
+			{% endfor %}
+			</ul>
 		</div>
 	{% endif %}
 	{% if user_type == 'ACCOUNT' or user_type == 'DIRECTOR' or user_type == 'PURCHASE' or user_type == 'REGISTRAR' %}
 		<div class='general'>
-			<div onclick="location.href='/purchase-request/department/view/waiting';"><span>In Process</span></div>
+			<div onclick="location.href='/purchase-request/department/view/waiting';"><span>Waiting for approval</span></div>
 			<div onclick="location.href='/purchase-request/department/view/approved';"><span>Approved</span></div>
 			{% if user_type == 'ACCOUNT' %}
 			<div onclick="location.href='/purchase-request/add_fund';"><span>Add New Fund</span></div>
@@ -31,20 +45,7 @@
 		</div>
 	{% endif %}
 	<!-- <div></div> -->
-	<div class="arrow2"></div>
-	<div id='notbutton'>
-		<span>Notifications</span>
-	</div>
-	<div id='notification' style="position:fixed; top:33vh; left:86vw; width:14vw;height:30%; overflow-y:scroll;visibility: hidden;">
-		<ul>
-		{% for description,id in notifications %}
-		<li style="background: white; ">
-			<a href="{% url 'purchase:view_notification' id %}" style="color:#59bd7d; text-decoration:none; margin:3px auto 2px auto;">{{description}}</a>
-		</li>
-		{% endfor %}
-		</ul>
-		
-	</div>
+
 	<script type="text/javascript">
 		const button=document.querySelector('#notbutton');
 		const list=document.querySelector('#notification');
