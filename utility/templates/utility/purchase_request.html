@@ -3,11 +3,11 @@
 <html>
 <head>
 	<title></title>
-	<link rel="stylesheet" type="text/css" href="{% static 'css/cr-req.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/cr-reque.css' %}">
 </head>
 <body>
 	<div class='container'>
-		<form action="/purchase-request/create" method="post">
+		<form action="/purchase-request/create" method="post" onsubmit="return validate()">
 			{% csrf_token %}
 			<img style="" src="{% static 'logo.jpg' %}">
 			<p>प्रारुप संख्या / FORM NO.: NITS/FORMS/ACCTS/FINAPPV/12-13/009</p>
@@ -19,14 +19,14 @@
 			<p style='text-align:right;'>दिनांक/ Date:{{date}}</p>
 			<div style='border:1px solid black;margin-top: 25px;'>
 				<p style='margin-top:0px;'>माल / सेवाओं के विवरण/ Description of material / services</p>
-				{{ form.specification.errors }}
-				{{ form.specification }} 
+				{{ form.description }}
+				<!-- <textarea name=''></textarea>  -->
 			</div>
 			<table class='table'>
 				<tr>
 				<td style="width:50%;"><div>a) i) उद्देश्य / उपयोग जिसके लिए सामग्री / सेवा की आवश्यकता है और अंतिम परिणाम /Purpose / use for which the material/service required and the eventual outcome</div></td>
 				<td >
-					{{ form.specification.errors }}
+					<!-- {{ form.specification.errors }} -->
 					{{ form.purpose }}
 				</td>
 				</tr>
@@ -67,7 +67,7 @@
 			</table>
 			<p>f) आइटम विवरण: {अगर जगह अपयास है, अतिरक्त शीट का उपयोग करें }/Item details: {In case space is
 			insufficient, please use additional sheet(s)}</p>
-			<table class='Table'>
+			<table class='inputTable'>
 				<tr>
 					<td><strong>आइटम सं./Item No.</strong></td>
 					<td><strong>सामग्री की विशिष्टता /Specification of Articles</strong></td>
@@ -76,13 +76,16 @@
 					<td><strong>वास्तविक लागत / Actual Cost</strong></td>
 				</tr>
 				<tr>
-					<td><input type="text" name="10"></td>
-					<td><textarea name='11'></textarea></td>
+					<td>1</td>
+					<td><textarea name='10'></textarea></td>
+					<td><input type="number" name="11"></td>
 					<td><input type="number" name="12"></td>
-					<td><input type="number" name="13"></td>
-					<td>{{ form.totalCost }}</td>
+					<td><input type="number" name="13" required></td>
 				</tr>
 			</table>
+			<div id='add'>add another row</div>
+			<div class='hidden' id='total'>{{form.totalCost}}</div>
+			<input class='hidden' type="number" name="count">
 			<p>g) क्या खरीद सीमित  निविदा / खुली निविदा या एकल निविदा के द्वारा किया जाना प्रस्तावित है/			whether procurement is proposed to be made by limited tender / open tender or single tender:
 			</p>
 			<!-- <button>submit and continue</button> -->
@@ -176,6 +179,34 @@
 		</table>
 		<p>ध्यान देः कृपया अधिक जानकारी के लिए  सस्ंथान की वेबसाइट में अपलोड सस्ंथान की प्रतिनिधिमडंल का अधिकार देखें।/ Note. Pl. refer to the delegation of power of the Institute uploaded in the Institute’s website for further information. </p>
 	</div>
+	<script type="text/javascript">
+		let index=14;
+		const table=document.querySelector('.inputTable').lastElementChild
+		const add=document.querySelector('#add');
+		const total=document.querySelector('#total').lastElementChild;
+		total.value=0;
+		add.addEventListener('click',function(){
+			tr=document.createElement('tr'); 
+			tr.innerHTML=table.lastElementChild.innerHTML;
+			table.appendChild(tr);
+			const tds=tr.children;
+			for(let i=1;i<5;i++){
+				tds[i].lastElementChild.name=index;
+				index++;
+				tds[i].lastElementChild.value=0;
+			}
+			tds[0].textContent=(index-10)/4;
+		})
+		const validate=function(){
+			document.getElementsByName('count')[0].value=(index-10)/4;
+			let val=0;
+			for(let i=13;i<index;i+=4){
+				const n=document.getElementsByName(i)[0].value;
+				val+=parseInt(n);
+			}
+			total.value=val;
+		}
+	</script>
 </body>
 </html>
 

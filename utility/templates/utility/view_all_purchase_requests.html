@@ -1,12 +1,7 @@
-{% load static %}
-<!DOCTYPE html>
-<html>
-<head>
-	<title>brandname</title>
-	<link rel="stylesheet" href="{% static 'css/form2.css' %}">
-	<link rel="stylesheet" href="{% static 'css/list2.css' %}">
-</head>
-<body>
+{% extends 'utility/base.html' %}
+
+{% block content %}
+	<div id='big'>
 	{% if formExists == True %}
 	<div id="listContainer">
 
@@ -15,13 +10,13 @@
 			<div class='itemContainer'>
 				<div class='item' onclick="location.href='{% url 'purchase:view_purchase_request' purchase_request.id %}';">
 					<p class='date'>{{purchase_request.dateofIndent}}</p>
-					<p class='specific'>{{purchase_request.specification}}</p>
+					<p class='specific'>{{purchase_request.description}}</p>
 				</div>
 			</div>
 			
 		{% endfor %}
 	</div>
-	<div id='formContainer'>
+	<div class='specialform formContainer'>
 		<h2 style="text-align: center;">Search or Filter</h2>
 		<form method="POST" action="/purchase-request/filter">
 		    {% csrf_token %}
@@ -45,5 +40,7 @@
 			{% endfor %}	
 		</div>
 	{% endif %}
-</body>
-</html>
+	</div>
+{% endblock %}
+<!-- </body>
+</html> -->

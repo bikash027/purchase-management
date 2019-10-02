@@ -1,5 +1,6 @@
 body{
 	background-color: #59bd7d;
+	margin:0px;
 }
 
 #field{
@@ -27,26 +28,8 @@ body{
 	margin:0px auto;
 	/*margin-top: 50px;*/
 }
-.listItem{
-	/*border:1px solid black;*/
-	/*border-bottom:0px;*/
-	/*position: relative;*/
-    /*top: 50%;*/
-    /*transform: translate(0%, -50%);*/
-	background-color: white;
-	/*margin:5px 0 5px 0;*/
-	height:45px;
-	font-size:1.2em;
-	box-shadow: 0 0 0px #11913a;
-	transition: all 50ms;
-	transition-property: box-shadow;
-}
-.listItem:hover{
-	box-shadow: 0 0 10px black;
-	/*width:30.5%;*/
-	/*height:43px;*/
-}
-#container{
+
+#big #container{
 	background-color: #9bbda4;
 	border-radius: 5px;
 	padding:5px;
@@ -58,23 +41,24 @@ body{
 #listContainer{
 	background-color: #9bbda4;
 	border-radius: 5px;
-	padding:5px;
+	padding:1vw;
 	padding-top: 10px;
 	padding-bottom: 10px;
-	width:60%;
+	width:53vw;
 	/*margin:2%;*/
 	float:left;
 	margin:50px 0;
-	margin-left: 5%;
+	margin-left: 12vw;
+	margin-right: 5vw;
 }
-#formContainer{
-	width:20%;
+.specialform{
+	width:20vw;
 	/*margin:50px 0;*/
 	float:left;
-	margin-left: 7.5%;
-	margin-right: 2.5%;
-	padding-left:2%;
-	padding-right: 2%;
+	/*margin-left: 2.5vw;*/
+	margin-right: 2vw;
+	padding-left:2vw;
+	padding-right: 2vw;
 }
 #container table,#listContainer table{
 	margin:50px auto;
@@ -84,15 +68,6 @@ body{
 }
 #container td,#listContainer td{
 	padding:7px;
-}
-#grid{
-	background-color: #9bbda4;
-	/*border-radius: 5px;*/
-	padding:5px;
-	width:80%;
-	margin:50px auto;
-	display: grid;
-	grid-template-columns: 1fr 1fr;	
 }
 /*a{*/
 	/*float:left;*/

@@ -2,11 +2,11 @@ body{
 	background-color: #59bd7d;
 }
 
-#container{
+#fundScontainer{
 	width:40%;
 	margin:20px auto;
 }
-#container div{
+#fundScontainer div{
 	background-color: white;
 	margin:20px 0;
 	padding: 10px;

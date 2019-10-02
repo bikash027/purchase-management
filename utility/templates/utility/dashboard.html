@@ -1,12 +1,8 @@
-{% load static %}
-<!DOCTYPE html>
-<html>
-<head>
-	<title></title>
-	<link rel="stylesheet" href="{% static 'css/dashBoard.css' %}">
-</head>
-<body>
-	<!-- <div id='container'> -->
+
+{% extends 'utility/base.html' %}
+
+{% block content %}
+	<!-- <div id='dashboard'> -->
 	{% if user_type == 'HOD' or user_type == 'FACULTY' %}	
 		<div id='grid'>
 			<div onclick="location.href='/purchase-request/create';"><span>NEW PURCHASE REQUEST</span></div>
@@ -34,17 +30,32 @@
 			{% endif %}
 		</div>
 	{% endif %}
-
-	<div id='notification' style="position:fixed; top:50%; left:10%; width:20%;height:30%; overflow:scroll;visibility: initial;">
-		<list>
+	<!-- <div></div> -->
+	<div class="arrow2"></div>
+	<div id='notbutton'>
+		<span>NOTIFICATIONS</span>
+	</div>
+	<div id='notification' style="position:fixed; top:33vh; left:86vw; width:14vw;height:30%; overflow-y:scroll;visibility: hidden;">
+		<ul>
 		{% for description,id in notifications %}
-		<ul style="background: black; ">
-			<a href="{% url 'purchase:view_notification' id %}" style="color:white; text-decoration:none; margin:3px auto 2px auto;">{{description}}</a>
-		</ul>
+		<li style="background: white; ">
+			<a href="{% url 'purchase:view_notification' id %}" style="color:#59bd7d; text-decoration:none; margin:3px auto 2px auto;">{{description}}</a>
+		</li>
 		{% endfor %}
-		</list>
+		</ul>
 		
 	</div>
+	<script type="text/javascript">
+		const button=document.querySelector('#notbutton');
+		const list=document.querySelector('#notification');
+		button.addEventListener("click",function(){
+			if(list.style.visibility=='hidden')
+				list.style.visibility='initial';
+			else
+				list.style.visibility='hidden';
+		})
+	</script>
 	<!-- </div> -->
-</body>
-</html>
+{% endblock %}
+<!-- </body>
+</html> -->

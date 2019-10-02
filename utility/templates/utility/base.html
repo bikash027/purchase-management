@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>purchase</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/form6.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/list8.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/list_funds3.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/rEqUEST.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/dashBoard3.css' %}">
+</head>
+<body>
+	<div class='nav'>
+		<!-- <br> -->
+		<div class='piece'>
+			<!-- <p> -->
+				<a href="/">HOME</a>
+			<!-- </p> -->
+		</div>
+		<div class='arrow'>	
+		</div>
+		<!-- <br><br><br> -->
+		<!-- <br> -->
+		<div class='piece second'>
+			<!-- <p> -->
+				<a href="/accounts/logout">LOGOUT</a>
+			<!-- </p> -->
+		</div>
+		<div class='arrow second'>	
+		</div>
+	</div>
+	<!-- <div class='tri'></div> -->
+	{% block content %}
+	{% endblock %}
+</body>
+</html>

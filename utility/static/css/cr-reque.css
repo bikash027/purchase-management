@@ -114,3 +114,13 @@ button{
 #Sanctioning{
 	margin-top: 200px;
 }
+.hidden{
+	visibility: hidden;
+}
+#add{
+	text-align: center;
+	width:30%;
+	margin:0 auto;
+	margin-top: 5px;
+	background-color: #c0ede9;
+}

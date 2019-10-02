@@ -1,12 +1,7 @@
-{% load static %}
-<!DOCTYPE html>
-<html>
-<head>
-	<title>purchase</title>
-	<link rel="stylesheet" type="text/css" href="{% static 'css/form2.css' %}">
-</head>
-<body>
-<div id='formContainer'>
+{% extends 'utility/base.html' %}
+
+{% block content %}
+<div class='formContainer'>
 		<form method="POST">
 		    {% csrf_token %}
 		    <table>
@@ -15,5 +10,4 @@
 		    <input id='submit' type="submit" value="submit">
 		</form>
 </div>
-</body>
-</html>
+{% endblock %}

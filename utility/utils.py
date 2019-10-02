@@ -172,7 +172,24 @@ def get_stats_department(pid):
             'fund_required':fund_required,
             'fund_required_total':fund_required_total
             }
-
+def getHTML(request):
+    count=int(request.POST['count'])
+    st=''
+    index=10
+    for i in range(count):
+        st+='<tr><td>'+str(i+1)+'</td>'
+        print('hi')
+        # index=base+(count-1)*4
+        st+='<td>'+request.POST[str(index)]+'</td>'
+        index+=1
+        st+='<td>'+request.POST[str(index)]+'</td>'
+        index+=1
+        st+='<td>'+request.POST[str(index)]+'</td>'
+        index+=1
+        st+='<td>'+request.POST[str(index)]+'</td>'
+        index+=1
+        st+='</tr>'
+    return st
 
 
 

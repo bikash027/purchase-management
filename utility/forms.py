@@ -8,7 +8,7 @@ class PurchaseRequestForm(forms.ModelForm):
     class Meta:
         model = PurchaseRequest
         fields = [
-            'purpose', 'specification', 'totalCost'
+            'purpose', 'specification', 'totalCost', 'description'
         ]
 
 class PurchaseRequestFilterForm(forms.Form):

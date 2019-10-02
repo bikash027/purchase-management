@@ -60,6 +60,7 @@ class PurchaseRequest(models.Model):
     purpose = models.TextField()
     specification = models.TextField()
     totalCost = models.FloatField(default = 0)
+    description = models.TextField(default = 'description missing')
     currentStatus = models.IntegerField(choices = PURCHASE_STATUS, default=0)
     employee = models.ForeignKey(Employee, on_delete = models.CASCADE)
     department = models.ForeignKey(Department, on_delete = models.CASCADE)

@@ -1,10 +1,11 @@
 body{
 	background-color: white;
 }
-#formContainer{
+.formContainer{
 	width:40%;
 	margin:50px auto;
 	background-color: white;
+	padding: 10px;
 	/*float:left;*/
 }
 label{
@@ -19,12 +20,12 @@ h2{
 	/*color:white;*/
 	margin: 10px;
 }
-#formContainer table{
+.formContainer table{
 	border-collapse: seperate;
 	border-spacing: 0 10px;
 	width:100%;
 }
-#formContainer tr{
+.formContainer tr{
 	background-color: #59bd7d;
 }
 

@@ -1,0 +1,65 @@
+
+#grid{
+	width:60%;
+	margin:0 auto;
+	margin-top: 20vh;
+}
+.general{
+	width:30%;
+	margin:5vh auto;
+	/*margin-top:10vh;*/
+}
+ #grid div, .general div{
+	color:#59bd7d;
+	background-color: white;
+	font-size:3em;
+	float: left;
+	width:46%;
+	margin:.5vh;
+	height:30vh;
+	padding-left: 5px;
+	padding-right: 5px;
+	text-align: center;
+	position:relative;
+	transform: scale(1);
+	transition-property: transform;
+}
+ .general div{
+	width:95%;
+	height:29vh;
+}
+ #grid div:hover, .general div:hover{
+	transform: scale(1.01);
+}
+ #grid div span, .general div span{
+	display: inline-block;
+	width:100%;
+	position:relative;
+	top:50%;
+	transform: translate(0%,-50%);
+}
+#notbutton{
+	background-color: white;
+	color:#59bd7d;
+	position:fixed;
+	top:21vh;
+	left:86vw;
+	width:14vw;
+	height:10vh;
+	text-align: center;
+}
+#notbutton span{
+	display:inline-block;
+	position:relative;
+	top:50%;
+	transform: translate(0%,-50%);
+}
+.arrow2{
+	position:fixed;
+	background-color: white;
+	top:21vh;
+	left:85vw;
+	border-right: 1vw solid white;
+	border-top:5vh solid #59bd7d;
+	border-bottom:5vh solid #59bd7d;
+}

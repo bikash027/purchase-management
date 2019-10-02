@@ -1,0 +1,181 @@
+body{
+	background-color: #59bd7d;
+}
+#requestContainer .container{
+	background-color: white;
+	border-radius: 5px;
+	padding:20px;
+	width:60%;
+	margin:50px auto;
+	margin-bottom: 0;
+}
+a{
+	/*float:left;*/
+	text-decoration:none; 
+	color:#59bd7d;
+	font-size:1.1em;
+}
+#requestContainer #name,#requestContainer #department{
+	float:left;
+	/*margin-bottom: 0;*/
+}
+#requestContainer #date,#requestContainer #status{
+	/*margin-top: 0;*/
+	text-align: right;
+}
+#requestContainer #date{
+	margin-top: 22.720px;
+	margin-bottom: 18.720px
+}
+#requestContainer .two-divs{
+	width:50%;
+	float:left;
+	
+}
+#forward{
+	width:50%;
+	/*float:left;*/
+	/*display:inline-block;*/
+	color:#59bd7d;
+	text-align: left;
+}
+#reject{
+	width:50%;
+	text-align: right;
+	/*color: rgb(215,66,62);*/
+}
+#reject a{
+	color: rgb(215,66,62);
+}
+#requestContainer form{
+	padding-left:38%; 
+	width:30%;
+	/*float:left;*/
+	display: inline-block;
+}
+
+#requestContainer .Bar{
+	width:10px;
+	margin:0 auto;
+	background-color: rgb(167,224,183);
+	height:70px;
+}
+#requestContainer #stats,#requestContainer .status{
+	width:50%;
+	background-color: rgb(167,224,183);
+	margin:0 auto;
+	padding: 15px;
+	text-align: center;
+	border-radius:15px;
+	color:white;
+	font-size:1.2em;
+	/*display: none;*/
+}
+#requestContainer #stats{
+	margin-top: 70px;
+	padding-bottom: 0;
+	border-bottom: 15px solid #21a649;
+	width:60%;
+	height:400px;
+	margin-bottom: 100px;
+}
+#requestContainer .buttons{
+	width:60%;
+	margin:0 auto;
+	margin-top: 20px;
+	padding: 15px;
+	/*color:white;*/
+}
+#requestContainer #button1,#requestContainer #button2{
+	background-color: white;
+	width:50%;
+	text-align: center;
+	float:left;
+	transform: scale(1);
+	transition-property: transform;
+}
+#requestContainer #button1:hover,#requestContainer #button2:hover{
+	transform: scale(1.02);
+}
+
+/*.graph{*/
+	/*height:400px;*/
+	/*width:80%;*/
+	/*border-left: 1px solid black;*/
+	/*border-bottom:1px solid black;*/
+	/*margin:0 auto;*/
+/*}*/
+#requestContainer .names{
+	height:auto;
+}
+#requestContainer .dep{
+	float:left;
+	height:400px;
+	width:33%;
+}
+#requestContainer .depNames{
+	float:left;
+	/*height:inherit;*/
+	width:33%;	
+}
+#requestContainer .bar{
+	position:relative;
+	/*left:80%;*/
+	width:100%;
+	background-color:#21a649;
+	top:40%;
+	height:60%;	
+}
+#requestContainer table{
+	text-align: center;
+}
+.nav{
+	width:8vw;
+	height:100vh;
+	position: fixed;
+	top:0;
+	left:0;
+	text-align: center;
+}
+.piece{
+	color:#59bd7d;
+	position:absolute;
+	background-color: white;
+	top:33vh;
+	width:8vw;
+	height:10vh;
+}
+.piece a{
+	display:inline-block;
+	position:relative;
+	top:50%;
+	transform: translate(0%,-50%);
+}
+.arrow{
+	position:absolute;
+	background-color: white;
+	top:33vh;
+	left:8vw;
+	border-left: 1vw solid white;
+	border-top:5vh solid #59bd7d;
+	border-bottom:5vh solid #59bd7d;
+}
+.second{
+	top:56vh;
+}
+/*
+.tri{
+	position:fixed;*/
+	/*background-color: white;*/
+/*	top:30vh;
+	left:2vw;
+	border-top: 5vh solid white;
+	border-right: 3vw solid transparent;
+	border-left: 3vw solid transparent;
+}*/
+
+#reqSpecTable{
+	width:90%;
+	margin:10px auto;
+
+}

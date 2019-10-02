@@ -17,7 +17,7 @@
 		<p id='note'>टिप्पणी एफ सं./NOTE: F. No</p>
 		<p style='text-align:right;'>दिनांक/ Date: {{date}}</p>
 		<div style='border:1px solid black;margin-top: 25px;'>
-			<p style='margin-top:0px;'>माल / सेवाओं के विवरण/ Description of material / services: {{post.specification}}</p>
+			<p style='margin-top:0px;'>माल / सेवाओं के विवरण/ Description of material / services: {{post.description}}</p>
 			 
 		</div>
 		<table class='table'>
@@ -70,13 +70,7 @@
                 <td><strong>प्रति युनिट दर/ Rate per Unit</strong></td>
                 <td><strong>वास्तविक लागत / Actual Cost</strong></td>
             </tr>
-            <tr>
-                <td>{{post.10}}</td>
-                <td>{{post.11}}</td>
-                <td>{{post.12}}</td>
-                <td>{{post.13}}</td>
-                <td>{{post.totalCost}}</td>
-            </tr>
+            {{ specification | safe }}
         </table>
         <p>g) क्या खरीद सीमित  निविदा / खुली निविदा या एकल निविदा के द्वारा किया जाना प्रस्तावित है/          whether procurement is proposed to be made by limited tender / open tender or single tender:
         </p>

@@ -26,8 +26,9 @@ def create_purchase_request(request):
             
             purchase_request = PurchaseRequest(
                 purpose = request.POST['purpose'], 
-                specification = request.POST['specification'],
+                specification = getHTML(request),
                 totalCost = request.POST['totalCost'],
+                description = request.POST['description'],
                 employee = employee,
                 department = department,
                 log = "Purchase Request Created by on {}".format(timezone.now()),
@@ -40,7 +41,8 @@ def create_purchase_request(request):
             purchase_request_log.save()
             department = dict(DEPARTMENT).get(employee.department.id)
             date=timezone.now()
-            return render(request,'utility/purchase_request_pdf.html',{'post':request.POST,'department':department,'date':date})
+            context={'post':request.POST,'department':department,'date':date,'specification':getHTML(request)}
+            return render(request,'utility/purchase_request_pdf.html',context)
         except:
             return HttpResponse("Failed to generate purchase request")
 

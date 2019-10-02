@@ -1,12 +1,7 @@
-{% load static %}
-<!DOCTYPE html>
-<html>
-<head>
-	<title></title>
-	<link rel="stylesheet" type="text/css" href="{% static 'css/list_funds.css' %}">
-</head>
-<body>
-	<div id='container'>
+{% extends 'utility/base.html' %}
+
+{% block content %}
+	<div id='fundScontainer'>
 		{% for fund in funds %}
 			<div>
 				<p>Amount: {{fund.amount}}</p>
@@ -31,5 +26,4 @@
 			</div>
 		{% endfor %}
 	</div>
-</body>
-</html>
+{% endblock %}

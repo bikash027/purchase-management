@@ -1,18 +1,9 @@
-<!-- <p>Amount&nbsp;{{purchase_request.totalCost}}</p>
-<p>Created By &nbsp; {{employee_name}}</p>
-<p>Specification &nbsp; {{purchase_request.specification}}</p>
-<p>Current Status &nbsp; {{status}}</p>
 
-<a href="{% url 'purchase:update_status' purchase_request.id %}" >Forward to next stage</a>
- -->
-{% load static %}
-<!DOCTYPE html>
-<html>
-<head>
-	<title>purchase</title>
-	<link rel="stylesheet" href="{% static 'css/reques.css' %}">
-</head>
+{% extends 'utility/base.html' %}
+
+{% block content %}
 <body>
+	<div id='requestContainer'>
 	<div class="container">
 		<div class='two-divs'>
 			<!-- Created by:&nbsp; -->
@@ -25,8 +16,9 @@
 			<p id='date'>Created on:&nbsp;{{purchase_request.dateofIndent}}</p>
 			<!-- <p id='status'>Current status of the request: {{status}}</p> -->
 		</div>
-		<table>
-			<tr>
+		<p>Purpose: {{purchase_request.purpose}}</p>
+		<table id='reqSpecTable'>
+			<!-- <tr>
 				<td>Purpose: </td>
 				<td>{{purchase_request.purpose}}</td>
 			</tr>
@@ -41,7 +33,7 @@
 			<tr>
 				<td>Status: </td>
 				<td>{{status}}</td>
-			</tr>
+			</tr> -->
 			<!-- <tr>
 				<td>number of units required: </td>
 				<td>{{purchase_req.NoOfItemsReq}}</td>
@@ -49,16 +41,30 @@
 			<!-- <p>Specifications: {{purchase_req.Specification}}</p>
 			<p>Rate per unit: {{purchase_req.RatePerUnit}}</p>
 			<p>number of units required: {{purchase_req.NoOfItemsReq}}</p> -->
-			
+			<tr>
+                <td><strong>Item No.</strong></td>
+                <td><strong>Specification of Articles</strong></td>
+                <td><strong>Number/ Qty.Required</strong></td>
+                <td><strong>Rate per Unit</strong></td>
+                <td><strong>Actual Cost</strong></td>
+            </tr>
+			{{purchase_request.specification | safe}}
 		</table>
+		<p>Amount: {{purchase_request.totalCost}}</p>
 		{% if ForwardReject == True %}
-				<p id='forward'>
+				<!-- <p id='forward'>
 					<a href="{% url 'purchase:physical_token' purchase_request.id 'forward' %}" >Forward to next stage</a>
-				</p>
+				</p> -->
 				<!-- <form method='post' action="{% url 'purchase:update_status' purchase_request.id %}"> -->
 					<!-- {% csrf_token %} -->
 					<!-- <input type="text" name="comment" placeholder="comment for rejection"> -->
-					<button onclick="location.href='/purchase_request/token/{{purchase_request.id}}/reject';">reject</button>
+					<!-- <button onclick="location.href='/purchase_request/token/{{purchase_request.id}}/reject';">reject</button> -->
+					<table style='width:90%;'>
+						<tr>
+							<td id='forward'><a href="{% url 'purchase:physical_token' purchase_request.id 'forward' %}" >Forward to next stage</a></td>
+							<td id='reject'><a href="/purchase-request/token/{{purchase_request.id}}/reject">reject</a></td>
+						</tr>
+					</table>
 				<!-- </form> -->
 		{% endif %}
 	</div>
@@ -108,6 +114,7 @@
 			
 		{% endfor %}
 	</div>
+	</div>
 	<script type="text/javascript">
 		const dummy=document.querySelector('.dummy');
 		// dummy.style.display='none';
@@ -155,5 +162,4 @@
 		bars[1].style.backgroundColor='rgb(209,209,77)';
 		bars[2].style.backgroundColor='rgb(166,75,92)';
 	</script>
-</body>
-</html>
+{% endblock %}
