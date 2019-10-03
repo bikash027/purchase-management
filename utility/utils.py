@@ -167,12 +167,17 @@ def get_stats_department(pid):
     fund_alloted=0
     fund_required=purchase_request.totalCost
     fund_required_total=0
+    
+    current_session_year = datetime.datetime.now().year
+    if(datetime.datetime.now().month < 4):
+        current_session_year -= 1
+
     for dist in fund_distributions:
-        if dist.fund.financialYear==2019:
+        if dist.fund.financialYear==current_session_year:
             fund_used+=dist.fundUsed
             fund_alloted+=dist.totalAmountReceived
-    start_date=datetime.date(2019,4,1)
-    end_date=datetime.date(2020,4,1)
+    start_date=datetime.date(current_session_year,4,1)
+    end_date=datetime.date(current_session_year+1,4,1)
     purchase_requests=PurchaseRequest.objects.filter(dateofIndent__range=(start_date, end_date))
     purchase_requests=purchase_requests.filter(department__id=department.id)
     # print('reached')
@@ -183,14 +188,13 @@ def get_stats_department(pid):
             'fund_required':fund_required,
             'fund_required_total':fund_required_total
             }
+
 def getHTML(request):
     count=int(request.POST['count'])
     st=''
     index=10
     for i in range(count):
         st+='<tr><td>'+str(i+1)+'</td>'
-        print('hi')
-        # index=base+(count-1)*4
         st+='<td>'+request.POST[str(index)]+'</td>'
         index+=1
         st+='<td>'+request.POST[str(index)]+'</td>'
