@@ -3,7 +3,7 @@
 <html>
 <head>
 	<title></title>
-	<link rel="stylesheet" type="text/css" href="{% static 'css/cr-req.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/cr-reque.css' %}">
 </head>
 <body>
 	<div class='container'>
@@ -18,6 +18,7 @@
 		<div style='border:1px solid black;margin-top: 25px;'>
 			<p style='margin-top:0px;'>माल / सेवाओं के विवरण/ Description of material / services: {{post.description}}</p>	 
 		</div>
+		<br>
 		<table class='table'>
             <tr>
             <td style="width:50%;">a) i) उद्देश्य / उपयोग जिसके लिए सामग्री / सेवा की आवश्यकता है और अंतिम परिणाम /Purpose / use for which the material/service required and the eventual outcome</td>
@@ -58,6 +59,7 @@
                 <td>{{post.scheme}}</td>
             </tr>
         </table>
+        <br>
         <p>f) आइटम विवरण: {अगर जगह अपयास है, अतिरक्त शीट का उपयोग करें }/Item details: {In case space is
         insufficient, please use additional sheet(s)}</p>
         <table class='Table'>

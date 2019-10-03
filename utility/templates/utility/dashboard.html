@@ -15,18 +15,22 @@
 			{% endif %}
 		</div>
 
-		<div class="arrow2"></div>
+		<div class="arrow arrow2"></div>
 		<div id='notbutton'>
 			<span>Notifications</span>
 		</div>
-		<div id='notification' style="position:fixed; top:33vh; left:86vw; width:14vw;height:30%; overflow-y:scroll;visibility: hidden;">
-			<ul>
-			{% for description,id in notifications %}
-			<li style="background: white; ">
-				<a href="{% url 'purchase:view_notification' id %}" style="color:#59bd7d; text-decoration:none; margin:3px auto 2px auto;">{{description}}</a>
-			</li>
+		<div id='notification' style="position:fixed;background: white; top:60vh; left:10vw; width:14vw;height:35vh; overflow-y:scroll;visibility: hidden;padding-left: 10px;">
+			<!-- <ul> -->
+			{% for description,id,seen in notifications %}
+			<p style=" ">
+				{% if seen == 'Y' %}
+					<a href="{% url 'purchase:view_notification' id %}" style="color:#59bd7d;">{{description}}</a>
+				{% else %}
+					<a href="{% url 'purchase:view_notification' id %}" style="color:#326645;">{{description}}</a>
+				{% endif %}
+			</p>
 			{% endfor %}
-			</ul>
+			<!-- </ul> -->
 		</div>
 	{% endif %}
 	{% if user_type == 'ACCOUNT' or user_type == 'DIRECTOR' or user_type == 'PURCHASE' or user_type == 'REGISTRAR' %}

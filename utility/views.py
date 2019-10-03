@@ -153,7 +153,7 @@ def list_funds(request):
     if employee.employeeType!=4:
         return HttpResponse("you don't have access to this page")
     try:
-        funds=Fund.objects.all()
+        funds=Fund.objects.filter(fundDistributed='N')
         return render(request,'utility/list_funds.html',{'funds':funds})
     except:
         return HttpResponse('no funds yet')
@@ -183,6 +183,8 @@ def distribute_fund(request, fid):
                     totalAmountReceived = form.cleaned_data.get('amount%d'%i)
                 )
                 fd.save()
+            _fund.fundDistributed='Y'
+            _fund.save()
         else:
             return HttpResponse("Fund distribution could not be done as the total exceeds the available fund")
     
@@ -244,10 +246,13 @@ def physical_token(request, id, action='forward'):
 
 def get_all_notifications(employee_id):
     notifications = Notification.objects.filter(purchaseRequest__employee__id = employee_id).order_by('date')
-    notif_list = [(str(x),x.purchaseRequest.id) for x in notifications]
+    notif_list = [(str(x),x.purchaseRequest.id,x.seen) for x in notifications]
     return notif_list
 
 @login_required
 def view_notification(request,id):
-    Notification.objects.filter(purchaseRequest__id = id).seen = 'Y'
+    notifications=Notification.objects.filter(purchaseRequest__id = id)
+    for x in notifications:
+        x.seen='Y'
+        x.save()
     return HttpResponseRedirect(reverse('purchase:view_purchase_request', args=(id,)))

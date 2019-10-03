@@ -1,6 +1,9 @@
 body{
 	background-color: #59bd7d;
 }
+#requestContainer{
+	margin-bottom:100px;
+}
 #requestContainer .container{
 	background-color: white;
 	border-radius: 5px;
@@ -141,8 +144,8 @@ a{
 	color:#59bd7d;
 	position:absolute;
 	background-color: white;
-	top:33vh;
-	width:8vw;
+	top:30vh;
+	width:9vw;
 	height:10vh;
 }
 .piece a{
@@ -154,26 +157,15 @@ a{
 .arrow{
 	position:absolute;
 	background-color: white;
-	top:33vh;
-	left:8vw;
+	top:30vh;
+	left:9vw;
 	border-left: 1vw solid white;
 	border-top:5vh solid #59bd7d;
 	border-bottom:5vh solid #59bd7d;
 }
 .second{
-	top:56vh;
+	top:45vh;
 }
-/*
-.tri{
-	position:fixed;*/
-	/*background-color: white;*/
-/*	top:30vh;
-	left:2vw;
-	border-top: 5vh solid white;
-	border-right: 3vw solid transparent;
-	border-left: 3vw solid transparent;
-}*/
-
 #reqSpecTable{
 	width:90%;
 	margin:10px auto;

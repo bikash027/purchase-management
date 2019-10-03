@@ -1,8 +1,9 @@
 
 #grid{
 	width:60%;
-	margin:0 auto;
+	/*margin:0 auto;*/
 	margin-top: 20vh;
+	margin-left: 25%;
 }
 .general{
 	width:30%;
@@ -42,9 +43,9 @@
 	background-color: white;
 	color:#59bd7d;
 	position:fixed;
-	top:21vh;
-	left:86vw;
-	width:14vw;
+	top:60vh;
+	left:0vw;
+	width:9vw;
 	height:10vh;
 	text-align: center;
 }
@@ -55,11 +56,11 @@
 	transform: translate(0%,-50%);
 }
 .arrow2{
-	position:fixed;
-	background-color: white;
-	top:21vh;
-	left:85vw;
+	/*position:fixed;*/
+	/*background-color: white;*/
+	top:60vh;
+	/*left:85vw;
 	border-right: 1vw solid white;
 	border-top:5vh solid #59bd7d;
-	border-bottom:5vh solid #59bd7d;
+	border-bottom:5vh solid #59bd7d;*/
 }

@@ -85,7 +85,7 @@ class Notification(models.Model):
     date = models.DateTimeField(auto_now_add = True)
 
     def __str__(self):
-        return str(self.purchaseRequest.purpose) + " status has changed to " + str(dict(PURCHASE_STATUS).get(self.statusUpdate))
+        return str(self.purchaseRequest.description) + " status has changed to " + str(dict(PURCHASE_STATUS).get(self.statusUpdate))
 
 class PurchaseReqLog(models.Model):
     purchaseRequest=models.ForeignKey(PurchaseRequest,on_delete=models.CASCADE)

@@ -120,8 +120,8 @@ def get_request_logs(id):
         # print(id,reqLogs)
         for i in range(0,len(reqLogs)-1):
             content={'changedTo':PURCHASE_STATUS[reqLogs[i].changedTo][1],
-            'date':reqLogs[i].date.date(),
-            'comment':reqLogs[i].comments}
+            'date':reqLogs[i+1].date.date(),
+            'comment':reqLogs[i+1].comments}
             # print('loop')
             # print(reqLogs[0].changedTo)
             if reqLogs[i].changedTo==0:
@@ -136,13 +136,24 @@ def get_request_logs(id):
                 content['changedTo']='purchased on '
             ar.append(content)
         log=reqLogs[len(reqLogs)-1]
-        if log.changedTo!=5:
+        if log.changedTo==6 or log.changedTo==5:
+            ar[len(ar)-1]={'changedTo':PURCHASE_STATUS[log.changedTo][1]+' on ',
+            'date':log.date.date(),
+            'comment':log.comments}
+            return ar
+
+        if log.changedTo!=5 and log.changedTo!=6:
             ar.append({'changedTo':PURCHASE_STATUS[log.changedTo][1]+' as of ',
             'date':log.date.date(),
             'comment':log.comments})
-
-        for i in range(0,len(ar)-1):
-            ar[i]['date']=ar[i+1]['date']
+        # else:
+        #     ar.append({'changedTo':PURCHASE_STATUS[log.changedTo][1]+' as of ',
+        #     'date':log.date.date(),
+        #     'comment':log.comments})
+        # for i in range(0,len(ar)-1):
+            # ar[i]['date']=ar[i+1]['date']
+            # ar[i]['comment']=ar[i+1]['comment']
+        ar[len(ar)-1]['comment']=''
     except:
         print('except')
         ar=[]
@@ -157,10 +168,10 @@ def get_stats_department(pid):
     fund_required=purchase_request.totalCost
     fund_required_total=0
     for dist in fund_distributions:
-        if dist.fund.financialYear==2018:
+        if dist.fund.financialYear==2019:
             fund_used+=dist.fundUsed
             fund_alloted+=dist.totalAmountReceived
-    start_date=datetime.date(2018,4,1)
+    start_date=datetime.date(2019,4,1)
     end_date=datetime.date(2020,4,1)
     purchase_requests=PurchaseRequest.objects.filter(dateofIndent__range=(start_date, end_date))
     purchase_requests=purchase_requests.filter(department__id=department.id)
