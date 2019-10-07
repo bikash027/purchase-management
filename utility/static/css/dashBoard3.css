@@ -11,11 +11,17 @@
 	/*margin-top:10vh;*/
 }
  #grid div, .general div{
-	color:#59bd7d;
-	background-color: white;
+	color:white;
+	background-color: rgb(21,195,100);
 	font-size:3em;
 	float: left;
-	width:46%;
+	width:45%;
+	border-style: solid;
+	border-color: black;
+	border-top:0;
+	border-bottom:0;  
+	border-left-width: 0.2vw;
+	border-right-width:  0.2vw;
 	margin:.5vh;
 	height:30vh;
 	padding-left: 5px;
@@ -40,8 +46,9 @@
 	transform: translate(0%,-50%);
 }
 #notbutton{
-	background-color: white;
-	color:#59bd7d;
+	background-color: rgb(21,195,100);
+	color:black;
+	/*rgb(8,27,54)*/
 	position:fixed;
 	top:60vh;
 	left:0vw;
@@ -56,11 +63,5 @@
 	transform: translate(0%,-50%);
 }
 .arrow2{
-	/*position:fixed;*/
-	/*background-color: white;*/
 	top:60vh;
-	/*left:85vw;
-	border-right: 1vw solid white;
-	border-top:5vh solid #59bd7d;
-	border-bottom:5vh solid #59bd7d;*/
 }

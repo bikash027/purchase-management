@@ -1,12 +1,13 @@
 body{
 	background-color: white;
+	margin:0px;
+	/*rgb(88,233,98)*/
 }
 .formContainer{
 	width:40%;
 	margin:50px auto;
 	background-color: white;
 	padding: 10px;
-	/*float:left;*/
 }
 label{
 	color:white;
@@ -56,4 +57,13 @@ ul{
 }
 #submit:hover{
 	transform: scaleY(1.05) scaleX(1.01);
+}
+#newTable{
+	background-color: rgb(21,195,100);
+	margin:100px auto;
+	margin-left: 15vw;
+	width:80vw;
+}
+#newTable td{
+	text-align: center;
 }

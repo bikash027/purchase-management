@@ -145,7 +145,7 @@ def add_fund(request):
             fundDescription = form.data.get('fundDescription'),
         )
         new_fund.save()
-        return HttpResponse("Added to core fund")
+        return HttpResponseRedirect(reverse('purchase:dashboard'))
 
 @login_required
 def list_funds(request):
@@ -185,10 +185,11 @@ def distribute_fund(request, fid):
                 fd.save()
             _fund.fundDistributed='Y'
             _fund.save()
+            return HttpResponseRedirect(reverse('purchase:dashboard'))
         else:
             return HttpResponse("Fund distribution could not be done as the total exceeds the available fund")
     
-    return render(request, 'utility/fund_distribution.html', {'form':form, 'fund_stats':coreFund,'noOfDepts':n})
+    return render(request, 'utility/fund_distribution_gui.html', {'form':form, 'fund_stats':coreFund,'noOfDepts':n})
 
 @login_required
 def update_status(request, action, id):
@@ -229,9 +230,6 @@ def update_status(request, action, id):
 @login_required
 def physical_token(request, id, action='forward'):
     form = TokenForm(request.POST or None)
-    if request.method == 'GET':
-        return render(request, 'utility/purchase_request_filter.html', {'form':form})
-
     if request.method == 'POST':
         form=TokenForm(request.POST)
         if form.is_valid():
@@ -243,6 +241,7 @@ def physical_token(request, id, action='forward'):
                 return update_status(request,action,id)
             except :
                 return HttpResponse('Invalid token')
+    return render(request, 'utility/purchase_request_filter.html', {'form':form})
 
 def get_all_notifications(employee_id):
     notifications = Notification.objects.filter(purchaseRequest__employee__id = employee_id).order_by('date')

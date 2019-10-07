@@ -1,44 +1,57 @@
-body{
-	background-color: #59bd7d;
-}
+
 #requestContainer{
 	margin-bottom:100px;
 }
 #requestContainer .container{
-	background-color: white;
+	background-color: rgb(21,195,100);
 	border-radius: 5px;
-	padding:20px;
+	/*padding:20px;*/
 	width:60%;
 	margin:50px auto;
 	margin-bottom: 0;
 }
 a{
-	/*float:left;*/
 	text-decoration:none; 
-	color:#59bd7d;
+	color:black;
 	font-size:1.1em;
 }
 #requestContainer #name,#requestContainer #department{
 	float:left;
-	/*margin-bottom: 0;*/
 }
 #requestContainer #date,#requestContainer #status{
-	/*margin-top: 0;*/
 	text-align: right;
 }
+#topTable{
+	padding:20px;
+	width:100%;
+	background-color: #95f5c8;
+	border-top-left-radius:5px;
+	border-top-right-radius:5px;
+}
 #requestContainer #date{
-	margin-top: 22.720px;
-	margin-bottom: 18.720px
+	/*margin-top: 22.720px;*/
+	/*margin-bottom: 18.720px*/
+	width:50%;
+	text-align: right;
 }
 #requestContainer .two-divs{
 	width:50%;
 	float:left;
 	
 }
+#ForRej{
+	background-color: #95f5c8;
+	border-bottom-left-radius:5px;
+	border-bottom-right-radius:5px;
+	width:100%;
+	padding-left:100px;
+	padding-right: 100px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	/*margin:0 auto;*/
+}
 #forward{
 	width:50%;
-	/*float:left;*/
-	/*display:inline-block;*/
 	color:#59bd7d;
 	text-align: left;
 }
@@ -90,7 +103,7 @@ a{
 	/*color:white;*/
 }
 #requestContainer #button1,#requestContainer #button2{
-	background-color: white;
+	background-color: rgb(167,224,183);
 	width:50%;
 	text-align: center;
 	float:left;
@@ -141,9 +154,9 @@ a{
 	text-align: center;
 }
 .piece{
-	color:#59bd7d;
+	color:rgb(42,111,46);
 	position:absolute;
-	background-color: white;
+	background-color: rgb(21,195,100);
 	top:30vh;
 	width:9vw;
 	height:10vh;
@@ -159,9 +172,9 @@ a{
 	background-color: white;
 	top:30vh;
 	left:9vw;
-	border-left: 1vw solid white;
-	border-top:5vh solid #59bd7d;
-	border-bottom:5vh solid #59bd7d;
+	border-left: 1vw solid rgb(21,195,100);
+	border-top:5vh solid white;
+	border-bottom:5vh solid white;
 }
 .second{
 	top:45vh;

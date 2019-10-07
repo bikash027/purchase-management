@@ -1,0 +1,22 @@
+{% extends 'utility/base.html' %}
+
+{% block content %}
+<form method="POST">
+<div class='formContainer' style="display:none;">
+		<h3>Total available fund : <span>{{fund_stats.amount}}</span></h3>
+		
+		    {% csrf_token %}
+		    <table id='hiddenTable'>
+		    	{{form.as_table}}
+		    </table>
+</div>
+<table id='newTable' >
+	<tbody>
+		
+	</tbody>
+</table>
+<input id='submit' type="submit" value="submit" style='width:30%;margin:0 auto;'>
+</form>
+{% load static %}
+<script type="text/javascript" src="{% static 'javascript/fund_distribution.js' %}"></script>
+{% endblock %}

@@ -1,7 +1,4 @@
-body{
-	background-color: #59bd7d;
-	margin:0px;
-}
+
 
 #field{
 	background-color: #d16060;
@@ -30,7 +27,7 @@ body{
 }
 
 #big #container{
-	background-color: #9bbda4;
+	background-color: rgb(21,195,100);
 	border-radius: 5px;
 	padding:5px;
 	padding-top: 10px;
@@ -39,7 +36,7 @@ body{
 	margin:50px auto;
 }
 #listContainer{
-	background-color: #9bbda4;
+	background-color: rgb(21,195,100);
 	border-radius: 5px;
 	padding:1vw;
 	padding-top: 10px;
