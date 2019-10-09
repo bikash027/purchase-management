@@ -2,7 +2,7 @@ from django.urls import path
 from .views import (create_purchase_request, 
 view_purchase_request_employee, view_purchase_request_department, view_purchase_request,dashboard_view,
 purchase_requests_with_filters, filter, add_fund,list_funds, distribute_fund, update_status, physical_token,
-view_notification)
+view_notification,show_distribution)
 
 app_name = 'utility'
 
@@ -19,4 +19,5 @@ urlpatterns = [
     path('distribute_fund/<int:fid>',distribute_fund, name='distribute_fund'),
     path('update_status/<int:id>',update_status, name='update_status'),
     path('token/<int:id>/<str:action>',physical_token, name='physical_token'),
+    path('show_distribution/<int:fid>',show_distribution, name='show_distribution'),
 ]

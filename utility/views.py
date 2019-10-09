@@ -153,7 +153,7 @@ def list_funds(request):
     if employee.employeeType!=4:
         return HttpResponse("you don't have access to this page")
     try:
-        funds=Fund.objects.filter(fundDistributed='N')
+        funds=Fund.objects.all()
         return render(request,'utility/list_funds.html',{'funds':funds})
     except:
         return HttpResponse('no funds yet')
@@ -190,6 +190,19 @@ def distribute_fund(request, fid):
             return HttpResponse("Fund distribution could not be done as the total exceeds the available fund")
     
     return render(request, 'utility/fund_distribution_gui.html', {'form':form, 'fund_stats':coreFund,'noOfDepts':n})
+
+@login_required
+def show_distribution(request,fid):
+    try:
+        fund_distributions=FundDistribution.objects.filter(fund__id= fid)
+        try:
+            amount=Fund.objects.get(id= fid).amount
+        except:
+            return HttpResponse("no fund-distribution found")
+        return render(request,'utility/view_fund_distribution.html',{'distributions': fund_distributions,'amount':amount})
+    except:
+        return HttpResponse("no fund-distribution found")
+
 
 @login_required
 def update_status(request, action, id):

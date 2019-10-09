@@ -4,7 +4,11 @@
 	margin:20px auto;
 }
 #fundScontainer div{
-	background-color: rgb(21,195,100);
+	background-color: #95f5c8;
 	margin:20px 0;
 	padding: 10px;
+}
+#distribution{
+	margin:0 auto;
+	/*text-align: center;*/
 }

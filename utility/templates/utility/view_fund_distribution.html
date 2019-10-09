@@ -1,0 +1,45 @@
+{% extends 'utility/base.html' %}
+
+{% block content %}
+<h3>Total available fund : <span>{{amount}}</span></h3>
+
+<table id='distribution'>
+	{% for distribution in distributions %}
+		<tr>
+			<td>{{distribution.department}}</td>
+			<td style='width:20px;'></td>
+			<td style='padding-left: 10px;'>{{distribution.totalAmountReceived}}</td>
+		</tr>
+	{% endfor %}
+</table>
+
+<script type="text/javascript">
+	const distribution=document.querySelector('#distribution').lastElementChild.children;
+	const total=parseInt(document.querySelector('h3').lastElementChild.textContent);
+	const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');
+	svg.setAttribute('width',100);
+	svg.setAttribute('height',100);
+	svg.setAttribute('viewBox','0 0 100 100');
+	svg.setAttribute('style','width:30vh;height:30vh;margin-top:20vh;margin-left:40vw;');
+	document.querySelector('body').appendChild(svg);
+	const colors=['orange','blue','red','teal','violet','green','indigo'];
+	let x=95;
+	let y=50;
+	let angle=0;
+	for(let i=0;i<distribution.length;i++){
+		const path=document.createElementNS("http://www.w3.org/2000/svg",'path');
+		const amount=parseInt(distribution[i].lastElementChild.textContent);
+		const ins_angle=(2*Math.PI)*amount/total;
+		angle+=ins_angle;
+		console.log(Math.cos(angle),Math.sin(angle));
+		let str='M '+x+' '+y+' A 45 45 0 '+(ins_angle>Math.PI?1:0)+' 0 ';
+		x=(50+45*Math.cos(angle));
+		y=(50-45*Math.sin(angle));
+		str+=x+' '+y+' '+'L 50 50 Z';
+		path.setAttribute('d',str);
+		path.setAttribute('fill',colors[i]);
+		svg.appendChild(path);
+		distribution[i].lastElementChild.previousElementSibling.style.backgroundColor=colors[i];
+	}
+</script>
+{% endblock %}
