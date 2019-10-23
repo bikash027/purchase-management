@@ -1,5 +1,5 @@
 body{
-	background-color: white;
+	background-color:white;
 }
 #container{
 	/*background-color: #59bd7d;*/
@@ -16,7 +16,7 @@ table{
 	width:100%;
 }
 tr{
-	background-color: #59bd7d;
+	background-color: rgb(15,80,96);
 }
 
 select,input{
@@ -30,7 +30,7 @@ textarea{
 	border:0px;
 }
 #submit{
-	background-color: #0c8a58;
+	background-color: rgb(15,80,96);
 	color: white;
 	border:0px;
 	display: block;

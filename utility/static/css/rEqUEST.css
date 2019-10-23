@@ -1,9 +1,11 @@
 
 #requestContainer{
 	margin-bottom:100px;
+	/*color:rgb(133,152,7);*/
 }
 #requestContainer .container{
-	background-color: rgb(21,195,100);
+	color:rgb(230,190,105);
+	background-color: var(--primary);
 	border-radius: 5px;
 	/*padding:20px;*/
 	width:60%;
@@ -12,7 +14,7 @@
 }
 a{
 	text-decoration:none; 
-	color:black;
+	color:var(--word);
 	font-size:1.1em;
 }
 #requestContainer #name,#requestContainer #department{
@@ -22,15 +24,15 @@ a{
 	text-align: right;
 }
 #topTable{
+	color: black;
 	padding:20px;
 	width:100%;
-	background-color: #95f5c8;
+	background-color: white;
+	/*rgb(44,99,108)*/
 	border-top-left-radius:5px;
 	border-top-right-radius:5px;
 }
 #requestContainer #date{
-	/*margin-top: 22.720px;*/
-	/*margin-bottom: 18.720px*/
 	width:50%;
 	text-align: right;
 }
@@ -40,7 +42,8 @@ a{
 	
 }
 #ForRej{
-	background-color: #95f5c8;
+	color: black;
+	background-color: white;
 	border-bottom-left-radius:5px;
 	border-bottom-right-radius:5px;
 	width:100%;
@@ -73,17 +76,17 @@ a{
 #requestContainer .Bar{
 	width:10px;
 	margin:0 auto;
-	background-color: rgb(167,224,183);
+	background-color: white;
 	height:70px;
 }
 #requestContainer #stats,#requestContainer .status{
 	width:50%;
-	background-color: rgb(167,224,183);
+	background-color: white;
 	margin:0 auto;
 	padding: 15px;
 	text-align: center;
 	border-radius:15px;
-	color:white;
+	/*color:white;*/
 	font-size:1.2em;
 	/*display: none;*/
 }
@@ -145,40 +148,7 @@ a{
 #requestContainer table{
 	text-align: center;
 }
-.nav{
-	width:8vw;
-	height:100vh;
-	position: fixed;
-	top:0;
-	left:0;
-	text-align: center;
-}
-.piece{
-	color:rgb(42,111,46);
-	position:absolute;
-	background-color: rgb(21,195,100);
-	top:30vh;
-	width:9vw;
-	height:10vh;
-}
-.piece a{
-	display:inline-block;
-	position:relative;
-	top:50%;
-	transform: translate(0%,-50%);
-}
-.arrow{
-	position:absolute;
-	background-color: white;
-	top:30vh;
-	left:9vw;
-	border-left: 1vw solid rgb(21,195,100);
-	border-top:5vh solid white;
-	border-bottom:5vh solid white;
-}
-.second{
-	top:45vh;
-}
+
 #reqSpecTable{
 	width:90%;
 	margin:10px auto;

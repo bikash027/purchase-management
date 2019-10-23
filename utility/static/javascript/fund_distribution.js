@@ -71,6 +71,7 @@ const hiddenTrs=document.querySelector('#hiddenTable').lastElementChild.children
 		tr.appendChild(td2);
 		const td3=document.createElement('td');
 		tr.appendChild(td3);
+		td3.style.backgroundColor='rgb(25,90,106)';
 		const div2=document.createElement('div');
 		td3.appendChild(div2);
 		div2.style.height='inherit';

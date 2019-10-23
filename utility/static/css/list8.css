@@ -27,7 +27,7 @@
 }
 
 #big #container{
-	background-color: rgb(21,195,100);
+	background-color: var(--primary);
 	border-radius: 5px;
 	padding:5px;
 	padding-top: 10px;
@@ -36,7 +36,7 @@
 	margin:50px auto;
 }
 #listContainer{
-	background-color: rgb(21,195,100);
+	background-color: var(--primary);
 	border-radius: 5px;
 	padding:1vw;
 	padding-top: 10px;

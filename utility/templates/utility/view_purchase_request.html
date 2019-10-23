@@ -24,12 +24,12 @@
 		</table>
 		<p style="padding: 20px;margin-bottom: 0;">Amount: {{purchase_request.totalCost}}</p>
 		{% if ForwardReject == True %}
-					<table id='ForRej'>
-						<tr>
-							<td id='forward'><a href="{% url 'purchase:physical_token' purchase_request.id 'forward' %}" >Forward to next stage</a></td>
-							<td id='reject'><a href="/purchase-request/token/{{purchase_request.id}}/reject">reject</a></td>
-						</tr>
-					</table>
+			<table id='ForRej'>
+				<tr>
+					<td id='forward'><a href="{% url 'purchase:physical_token' purchase_request.id 'forward' %}" >Forward to next stage</a></td>
+					<td id='reject'><a href="/purchase-request/token/{{purchase_request.id}}/reject">reject</a></td>
+				</tr>
+			</table>
 		{% endif %}
 	</div>
 	{% if accounts == True %}

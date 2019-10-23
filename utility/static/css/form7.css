@@ -1,5 +1,27 @@
+:root{
+	--primary:rgb(15,80,96);
+	/*rgb(21,195,100),blue:rgb(10,42,93)*/
+	--word: rgb(243,162,17);
+	/*golden:rgb(239,202,8)*/
+	--background:rgb(179,238,199);
+	/*light-blue:rgb(55,91,126),yellowish:rgb(199,227,111),
+	pinkish:rgb(237,195,215),greenish:rgb(136,237,169)*/
+}
+/* roboto-condensed-regular - latin */
+@font-face {
+  font-family: 'Roboto Condensed';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../fonts/roboto-condensed-v18-latin-regular.eot'); /* IE9 Compat Modes */
+  src: local('Roboto Condensed'), local('RobotoCondensed-Regular'),
+       url('../fonts/roboto-condensed-v18-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('../fonts/roboto-condensed-v18-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+       url('../fonts/roboto-condensed-v18-latin-regular.woff') format('woff'), /* Modern Browsers */
+       url('../fonts/roboto-condensed-v18-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('../fonts/roboto-condensed-v18-latin-regular.svg#RobotoCondensed') format('svg'); /* Legacy iOS */
+}
 body{
-	background-color: white;
+	background-color: var(--background);
 	margin:0px;
 	/*rgb(88,233,98)*/
 }
@@ -27,7 +49,7 @@ h2{
 	width:100%;
 }
 .formContainer tr{
-	background-color: #59bd7d;
+	background-color: var(--primary);
 }
 
 select,input{
@@ -47,7 +69,7 @@ ul{
 	padding-bottom: 16px;
 }
 #submit{
-	background-color: #0c8a58;
+	background-color: var(--primary);
 	color: white;
 	border:0px;
 	display: block;
@@ -59,11 +81,15 @@ ul{
 	transform: scaleY(1.05) scaleX(1.01);
 }
 #newTable{
-	background-color: rgb(21,195,100);
+	background-color: var(--primary);
+	color:var(--word);
 	margin:100px auto;
 	margin-left: 15vw;
 	width:80vw;
 }
 #newTable td{
 	text-align: center;
+}
+#newTable input{
+	color:black;
 }
