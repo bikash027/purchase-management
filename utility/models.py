@@ -72,6 +72,7 @@ class PurchaseRequest(models.Model):
     employee = models.ForeignKey(Employee, on_delete = models.CASCADE)
     department = models.ForeignKey(Department, on_delete = models.CASCADE)
     moneyGranted = models.CharField(choices = BOOLEAN, max_length=1, default='N')
+    financialYear = models.IntegerField(default='0')
     log = models.TextField()
 
     def __str__(self):
