@@ -1,6 +1,6 @@
 
 #requestContainer{
-	margin-bottom:100px;
+	border-bottom:100px solid transparent;
 	/*color:rgb(133,152,7);*/
 }
 #requestContainer .container{

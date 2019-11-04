@@ -3,8 +3,8 @@
 	/*rgb(21,195,100),blue:rgb(10,42,93)*/
 	--word: rgb(243,162,17);
 	/*golden:rgb(239,202,8)*/
-	--background:rgb(179,238,199);
-	/*light-blue:rgb(55,91,126),yellowish:rgb(199,227,111),
+	--background:rgb(242, 202, 114);
+	/*light sky:rgb(179,238,199)light-blue:rgb(55,91,126),yellowish:rgb(199,227,111),
 	pinkish:rgb(237,195,215),greenish:rgb(136,237,169)*/
 }
 /* roboto-condensed-regular - latin */
@@ -21,10 +21,15 @@
        url('../fonts/roboto-condensed-v18-latin-regular.svg#RobotoCondensed') format('svg'); /* Legacy iOS */
 }
 body{
-	background-color: var(--background);
+	background-image: linear-gradient(white, var(--background));
+	/*background-color: var(--background);*/
 	margin:0px;
+	min-height: 100vh;
 	/*rgb(88,233,98)*/
 }
+/*html{
+	background-image: linear-gradient(white, var(--background));
+}*/
 .formContainer{
 	width:40%;
 	margin:50px auto;

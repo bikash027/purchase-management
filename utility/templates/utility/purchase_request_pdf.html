@@ -16,13 +16,13 @@
 		<p id='note'>टिप्पणी एफ सं./NOTE: F. No</p>
 		<p style='text-align:right;'>दिनांक/ Date: {{date}}</p>
 		<div style='border:1px solid black;margin-top: 25px;'>
-			<p style='margin-top:0px;'>माल / सेवाओं के विवरण/ Description of material / services: {{post.description}}</p>	 
+			<p style='margin-top:0px;'>माल / सेवाओं के विवरण/ Description of material / services:  {{post.description}}</p>	 
 		</div>
 		<br>
 		<table class='table'>
             <tr>
             <td style="width:50%;">a) i) उद्देश्य / उपयोग जिसके लिए सामग्री / सेवा की आवश्यकता है और अंतिम परिणाम /Purpose / use for which the material/service required and the eventual outcome</td>
-            <td>purpose {{post.purpose}}</td>
+            <td> {{post.purpose}}</td>
             </tr>
             <tr>
             <td>ii) क्या आवश्यकता पहले अनुमान किया गया था /Whether requirement was projected before</td>
@@ -165,12 +165,17 @@
 			</tr>
 		</table>
 		<p>ध्यान देः कृपया अधिक जानकारी के लिए  सस्ंथान की वेबसाइट में अपलोड सस्ंथान की प्रतिनिधिमडंल का अधिकार देखें।/ Note. Pl. refer to the delegation of power of the Institute uploaded in the Institute’s website for further information. </p>
-		<button>print</button>
+		<a href="/">.</a>
 	</div>
 	<script type="text/javascript">
-		const button=document.querySelector('button');
-		button.addEventListener('click',function(){
+		// const button=document.querySelector('button');
+		const a=document.querySelector('a');
+		a.style.visibility='hidden';
+		window.onload=function(){
 			window.print();
+		}
+		window.addEventListener('afterprint',function(){
+			a.click();
 		});
 	</script>
 </body>

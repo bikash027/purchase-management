@@ -1,10 +1,11 @@
 
 #fundScontainer{
+	
 	width:40%;
 	margin:20px auto;
 }
 #fundScontainer div{
-	background-color: white;
+	background-color: rgb(208, 221, 245);
 	margin:20px 0;
 	padding: 10px;
 }

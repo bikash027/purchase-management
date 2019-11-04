@@ -4,11 +4,21 @@
 	<div id='fundScontainer'>
 		{% for fund in funds %}
 			<div>
-				<p>Amount: {{fund.amount}}</p>
-				<p>Fund received on: {{fund.dateOfFundReceive}}</p>
-				<p>For the Financial Year: {{fund.financialYear}}</p>
-				<p>Fund Description: {{fund.fundDescription}}</p>
-				<!-- <p>{{fund.fundDistributi}}</p> -->
+				<table>
+					<tr>
+						<td>Amount:</td> <td> {{fund.amount}}</td>
+					</tr>
+					<tr>
+						<td>Fund received on:</td><td> {{fund.dateOfFundReceive}}</td>
+					</tr>
+					<tr>
+						<td>For the Financial Year:</td><td> {{fund.financialYear}}</td>
+					</tr>
+					<tr>
+						<td>Fund Description:</td><td> {{fund.fundDescription}}</td>
+					</tr>
+				</table>
+					<!-- <p>{{fund.fundDistributi}}</p> -->
 				{% if fund.fundDistributed == 'N' %}
 					<p>
 						<a href="/purchase-request/distribute_fund/{{fund.id}}">
