@@ -14,41 +14,41 @@
 		<p>माल या सेवा की खरीद के लिए स्वीकृति/Approval for procurement of materials or services</p>
 		<p>विभाग/ शाखा Deptt./Branch: {{department}} </p>	
 		<p id='note'>टिप्पणी एफ सं./NOTE: F. No</p>
-		<p style='text-align:right;'>दिनांक/ Date: {{date}}</p>
+		<p style='text-align:right;'>दिनांक/ Date: {{purchase_request.dateofIndent}}</p>
 		<div style='border:1px solid black;margin-top: 25px;'>
-			<p style='margin-top:0px;'>माल / सेवाओं के विवरण/ Description of material / services:  {{post.description}}</p>	 
+			<p style='margin-top:0px;'>माल / सेवाओं के विवरण/ Description of material / services:  {{purchase_request.description}}</p>	 
 		</div>
 		<br>
 		<table class='table'>
             <tr>
             <td style="width:50%;">a) i) उद्देश्य / उपयोग जिसके लिए सामग्री / सेवा की आवश्यकता है और अंतिम परिणाम /Purpose / use for which the material/service required and the eventual outcome</td>
-            <td> {{post.purpose}}</td>
+            <td> {{purchase_request.purpose}}</td>
             </tr>
             <tr>
             <td>ii) क्या आवश्यकता पहले अनुमान किया गया था /Whether requirement was projected before</td>
-            <td>{{post.requirementProjection}}</td>
+            <td>{{purchase_request.requirementProjection}}</td>
             </tr>
             <tr>
                 <td>iii) आवश्यकता की तात्कालिकता /Urgency of requirement</td>
-                <td>{{post.requirementUrgency}}</td>
+                <td>{{purchase_request.requirementUrgency}}</td>
             </tr>
             <tr>
                 <td>b) इस सामग्री / सेवा की वरीयता का कारण / Reasons for preference of this material/service
                 </td>
-                <td>{{post.preferenceReason}}</td>
+                <td>{{purchase_request.preferenceReason}}</td>
             </tr>
             <tr>
                 <td>c) आवश्यकता की अवधि और किस समय के लिए आवश्यक / Period of requirement and by what time required:
                 </td>
-                <td>{{post.requirementPeriod}}</td>
+                <td>{{purchase_request.requirementPeriod}}</td>
             </tr>
             <tr>
                 <td>d) प्रस्तावित माल / सेवायें तकनीकी रूप से संभव है और पैरामीटर से मिलता है/ /Whether material / services proposed is technically feasible and meets parameter:</td>
-                <td>{{post.feasible}}</td>
+                <td>{{purchase_request.feasible}}</td>
             </tr>
             <tr>
                 <td>क्या सामग्री एक मालिकाना सामग्री है /Whether material is a proprietary material</td>
-                <td>{{post.proprietary}}</td>
+                <td>{{purchase_request.proprietary}}</td>
             </tr>
             <tr>
                 <td>e) यदि आवश्यकता किसी एक विशेष योजना / परियोजना के
@@ -56,7 +56,7 @@
                 for a particular scheme/project – name of the Scheme/
                 Project :
                 </td>
-                <td>{{post.scheme}}</td>
+                <td>{{purchase_request.scheme}}</td>
             </tr>
         </table>
         <br>
@@ -70,7 +70,7 @@
                 <td><strong>प्रति युनिट दर/ Rate per Unit</strong></td>
                 <td><strong>वास्तविक लागत / Actual Cost</strong></td>
             </tr>
-            {{ specification | safe }}
+            {{ purchase_request.specification | safe }}
         </table>
         <p>g) क्या खरीद सीमित  निविदा / खुली निविदा या एकल निविदा के द्वारा किया जाना प्रस्तावित है/          whether procurement is proposed to be made by limited tender / open tender or single tender:
         </p>

@@ -22,7 +22,16 @@
             </tr>
 			{{purchase_request.specification | safe}}
 		</table>
-		<p style="padding: 20px;margin-bottom: 0;">Amount: {{purchase_request.totalCost}}</p>
+		<table style="width: 100%;margin-bottom: 0;">
+			<tr>
+				<td>
+					<p >Amount: {{purchase_request.totalCost}}</p>
+				</td>
+				<td>
+					<p><a href="{% url 'purchase:print_request' purchase_request.id %}">print request form</a></p>
+				</td>
+			</tr>
+		</table>
 		{% if ForwardReject == True %}
 			<table id='ForRej'>
 				<tr>
@@ -56,13 +65,13 @@
 				</div>
 			<!-- </div> -->
 			<div class='graph names'>
-				<div class='depNames'>
+				<div class='barNames'>
 					<p>fund remaining: <span>{{stats.fund_remaining}}</span></p>
 				</div>
-				<div class='depNames'>
+				<div class='barNames'>
 					<p>fund required: <span>{{stats.fund_required}}</span></p>
 				</div>
-				<div class='depNames'>
+				<div class='barNames'>
 					<p>fun required by all: <span>{{stats.fund_required_total}}</span></p>
 				</div>
 			</div>

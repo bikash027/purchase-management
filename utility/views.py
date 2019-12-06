@@ -48,15 +48,23 @@ def create_purchase_request(request):
                 changedTo=0
             )
             purchase_request_log.save()
-            department = dict(DEPARTMENT).get(employee.department.id)
-            date = timezone.now()
-            context = {'post': request.POST, 'department': department,
-                       'date': date, 'specification': getHTML(request)}
-            return render(request, 'utility/purchase_request_pdf.html', context)
+            return HttpResponseRedirect(reverse('purchase:print_request', args=(purchase_request.id,)))
         except:
             return HttpResponse("Failed to generate purchase request")
 
-    return HttpResponse("Purchase request created")
+    # return HttpResponse("Purchase request created")
+
+@login_required
+def print_request(request,id):
+    try:
+        purchase_request=PurchaseRequest.objects.get(id=id)
+        context={
+            'purchase_request': purchase_request,
+            'department': dict(DEPARTMENT).get(purchase_request.department.id)
+        }
+        return render(request, 'utility/purchase_request_pdf.html',context)
+    except:
+        return HttpResponse("purchase request not found")
 
 
 @login_required
@@ -273,6 +281,9 @@ def update_status(request, action, id):
             purchase_request.currentStatus = 1
             purchase_request_log.changedTo = 1
         elif employee.employeeType == 2:
+            stats=get_stats_department(id);
+            if stats['fund_remaining']<stats['fund_required']:
+                return HttpResponse("Cannot forward due to lack of fund")
             adjust_fund(id, 'grant')
             purchase_request = PurchaseRequest.objects.get(id = id)
             purchase_request.currentStatus = 2

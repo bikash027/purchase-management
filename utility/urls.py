@@ -2,7 +2,7 @@ from django.urls import path
 from .views import (create_purchase_request, 
 view_purchase_request_employee, view_purchase_request_department, view_purchase_request,dashboard_view,
 purchase_requests_with_filters, filter, add_fund,list_funds, distribute_fund, update_status, physical_token,
-view_notification,show_distribution)
+view_notification,show_distribution, print_request)
 
 app_name = 'utility'
 
@@ -12,6 +12,7 @@ urlpatterns = [
     path('employee/view',view_purchase_request_employee, name='view_purchase_request_employee'),
     path('department/view/<str:w_or_a>',view_purchase_request_department, name='view_purchase_request_department'),
     path('view/<int:id>',view_purchase_request,name='view_purchase_request'),
+    path('print/<int:id>',print_request,name='print_request'),
     path('notification/<int:id>',view_notification,name='view_notification'),
     path('filter',filter,name='filter'),
     path('add_fund',add_fund, name='add_fund'),
