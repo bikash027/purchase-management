@@ -51,7 +51,6 @@ def requiresForward(pid,uid):
         if status==0:
             return True
     if employee.employeeType==1:
-        # print('here')
         return False
     if employee.employeeType==2 and status==1:
         return True
@@ -159,13 +158,10 @@ def get_request_logs(id):
         ar=[]
     return ar
 
-def get_stats_department(pid):
-    purchase_request=PurchaseRequest.objects.get(id=pid)
-    department=purchase_request.department    
-    fund_distributions=FundDistribution.objects.filter(department__id=department.id)
+def get_stats_department(deptId):    
+    fund_distributions=FundDistribution.objects.filter(department__id=deptId)
     fund_used=0
     fund_alloted=0
-    fund_required=purchase_request.totalCost
     fund_required_total=0
     
     current_session_year = datetime.datetime.now().year
@@ -179,14 +175,12 @@ def get_stats_department(pid):
     start_date=datetime.date(current_session_year,4,1)
     end_date=datetime.date(current_session_year+1,4,1)
     purchase_requests=PurchaseRequest.objects.filter(dateofIndent__range=(start_date, end_date))
-    purchase_requests=purchase_requests.filter(department__id=department.id).filter(currentStatus__lte = 1)
-    # print('reached')
+    purchase_requests=purchase_requests.filter(department__id=deptId).filter(currentStatus__lte = 1)
     for req in purchase_requests:
         fund_required_total+=req.totalCost
     return {
-            'fund_remaining':fund_alloted-fund_used,
-            'fund_required':fund_required,
-            'fund_required_total':fund_required_total,
+            'fund remaining':fund_alloted-fund_used,
+            'fund required total':fund_required_total,
             }
 
 def getHTML(request):

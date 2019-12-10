@@ -2,7 +2,9 @@
 
 {% block content %}
 <h3>Total available fund : <span>{{amount}}</span></h3>
-
+<div id='pieChart'>
+	<canvas id="myChart" width="200" height="200"></canvas>
+</div>
 <table id='distribution'>
 	{% for distribution in distributions %}
 		<tr>
@@ -13,33 +15,57 @@
 	{% endfor %}
 </table>
 
+{% load static %}
+<script type="text/javascript" src="{% static 'javascript/Chart.min.js' %}"></script>
 <script type="text/javascript">
-	const distribution=document.querySelector('#distribution').lastElementChild.children;
-	const total=parseInt(document.querySelector('h3').lastElementChild.textContent);
-	const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');
-	svg.setAttribute('width',100);
-	svg.setAttribute('height',100);
-	svg.setAttribute('viewBox','0 0 100 100');
-	svg.setAttribute('style','width:30vh;height:30vh;margin-top:20vh;margin-left:40vw;');
-	document.querySelector('body').appendChild(svg);
-	const colors=['orange','blue','red','teal','violet','green','indigo'];
-	let x=95;
-	let y=50;
-	let angle=0;
+	const distribution=document.getElementById('distribution').lastElementChild.children;
+	// const labels_and_data=distributions.map((distribution)=>{
+	const data=[];
+	const labels=[];
 	for(let i=0;i<distribution.length;i++){
-		const path=document.createElementNS("http://www.w3.org/2000/svg",'path');
-		const amount=parseInt(distribution[i].lastElementChild.textContent);
-		const ins_angle=(2*Math.PI)*amount/total;
-		angle+=ins_angle;
-		console.log(Math.cos(angle),Math.sin(angle));
-		let str='M '+x+' '+y+' A 45 45 0 '+(ins_angle>Math.PI?1:0)+' 0 ';
-		x=(50+45*Math.cos(angle));
-		y=(50-45*Math.sin(angle));
-		str+=x+' '+y+' '+'L 50 50 Z';
-		path.setAttribute('d',str);
-		path.setAttribute('fill',colors[i]);
-		svg.appendChild(path);
-		distribution[i].lastElementChild.previousElementSibling.style.backgroundColor=colors[i];
+		labels.push(distribution[i].firstElementChild.textContent);
+		data.push(parseInt(distribution[i].lastElementChild.textContent));
 	}
+	const ctx = document.getElementById('myChart').getContext('2d');
+	var myChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Amount in Rs',
+                data: data,
+                backgroundColor: [
+                	'rgba(255, 228, 196, 0.6)',
+                    'rgba(138, 43, 226, 0.6)',
+                    'rgba(165, 42, 42, 0.6)',
+                    'rgba(255, 127, 80, 0.6)',
+                    'rgba(220, 20, 60, 0.6)',
+                    'rgba(218, 165, 32, 0.6)',
+                    'rgba(255, 99, 132, 0.6)',
+                    'rgba(54, 162, 235, 0.6)',
+                    'rgba(255, 206, 86, 0.6)',
+                    'rgba(240, 248, 255, 0.6)',
+                    'rgba(245, 245, 220, 0.6)',
+                    
+
+                ],
+                // borderColor: [
+                //     'rgba(255, 99, 132, 1)',
+                //     'rgba(54, 162, 235, 1)',
+                //     'rgba(255, 206, 86, 1)',
+                // ],
+                // borderWidth: 1
+            }]
+        },
+        /*options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }*/
+    });
 </script>
 {% endblock %}

@@ -18,8 +18,7 @@
 						<td>Fund Description:</td><td> {{fund.fundDescription}}</td>
 					</tr>
 				</table>
-					<!-- <p>{{fund.fundDistributi}}</p> -->
-				{% if fund.fundDistributed == 'N' %}
+				{% if fund.fundDistributed == 'N' and employeeType == 'DIRECTOR' %}
 					<p>
 						<a href="/purchase-request/distribute_fund/{{fund.id}}">
 							Distribute funds

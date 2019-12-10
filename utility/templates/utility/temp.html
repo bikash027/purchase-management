@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ljsdf</title>
+</head>
+<body>
+	<p>how about this</p>
+	{{purchase_request.dateofIndent}}
+	{{purchase_request.purpose}}
+	{{purchase_request.totalCost}}
+	{{purchase_request.specification}}
+	{{purchase_request.department.id}}
+	{% for log in logs %}
+		<!-- <div class='Bar'></div> -->
+		<div class='status'>
+			<p>{{log.changedTo}} {{log.date}}</p>
+			<p>{{log.comment}}</p>
+		</div>
+	{% endfor %}
+</body>
+</html>

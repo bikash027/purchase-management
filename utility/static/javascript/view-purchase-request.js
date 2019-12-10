@@ -25,31 +25,10 @@ button2.addEventListener('click',function(){
 	button1.style.backgroundColor='white';
 	button1.style.color='black';
 })
-const bars=document.querySelectorAll('.bar');
-const barNames=document.querySelectorAll('.barNames')
-const numbers=[];
+// const bars=document.querySelectorAll('.bar');
+// const barNames=document.querySelectorAll('.barNames')
+// const numbers=[];
 // depNames.map(function(depName){
 	// return depName.lastElementChild.textContent
 // })
-for(let i=0;i<3;i++){
-	numbers.push(barNames[i].lastElementChild.lastElementChild.textContent);
-	console.log(numbers[i]);
-}
-let max=0;
-for(let i=0;i<3;i++){
-	numbers[i]=parseInt(numbers[i]);
-
-	if(numbers[i]>max)
-		max=numbers[i];
-}
-for(let i=0;i<3;i++){
-	bars[i].style.height=300*(numbers[i]/max)+'px';
-	bars[i].style.top=(400-300*(numbers[i]/max))+'px';
-}
-bars[0].style.backgroundColor='rgb(166,75,92)';
-bars[1].style.backgroundColor='rgb(209,209,77)';
-bars[2].style.backgroundColor='rgb(166,75,92)';
-
-if(numbers[1]>numbers[0]){
-	document.querySelector("#forward").lastElementChild.style.display='none';
-}
+// }

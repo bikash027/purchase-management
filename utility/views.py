@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import PurchaseRequestForm, PurchaseRequestFilterForm, FundForm, FundDistributionForm, TokenForm
 from utility.models import Employee, PurchaseRequest, HOD, Fund, Department, FundDistribution, Notification, PurchaseReqLog
 from django.utils import timezone
-from django.http import Http404, HttpResponseRedirect
+from django.http import Http404, HttpResponseRedirect,JsonResponse
 from accounts.choices import PURCHASE_STATUS, USER_TYPES, DEPARTMENT
 from django.db.models import Q
 
@@ -39,7 +39,6 @@ def create_purchase_request(request):
                 description=request.POST['description'],
                 employee=employee,
                 department=department,
-                # fundAllocation =
                 log="Purchase Request Created by on {}".format(timezone.now()),
             )
             purchase_request.save()
@@ -110,24 +109,21 @@ def view_purchase_request_department(request, w_or_a='waiting'):
 @login_required
 def view_purchase_request(request, id):
     try:
-        purchase_requests = PurchaseRequest.objects.get(id=id)
-        user = purchase_requests.employee.user
+        purchase_request = PurchaseRequest.objects.get(id=id)
+        user = purchase_request.employee.user
         employee_name = user.first_name + " " + user.last_name
-        status = dict(PURCHASE_STATUS).get(purchase_requests.currentStatus)
+        status = dict(PURCHASE_STATUS).get(purchase_request.currentStatus)
         ar = get_request_logs(id)
-        context = {'purchase_request': purchase_requests,
+        context = {'purchase_request': purchase_request,
                    'employee_name': employee_name,
                    'status': status,
                    'logs': ar,
                    'ForwardReject': False,
                    'accounts': False}
-        button = requiresForward(id, request.user.id)
-        if button == True:
+        if requiresForward(id, request.user.id) == True:
             context['ForwardReject'] = True
             if Employee.objects.get(user__id=request.user.id).employeeType == 2:
                 context['accounts'] = True
-                context['stats'] = get_stats_department(id)
-                # print('reached')
             return render(request, 'utility/view_purchase_request.html', context)
         return render(request, 'utility/view_purchase_request.html', context)
     except:
@@ -210,11 +206,15 @@ def add_fund(request):
 @login_required
 def list_funds(request):
     employee = Employee.objects.get(user__id=request.user.id)
-    if employee.employeeType != 4:
+    employeeType=dict(USER_TYPES).get(employee.employeeType)
+    if employeeType!='DIRECTOR' and employeeType!='ACCOUNT':
         return HttpResponse("you don't have access to this page")
     try:
-        funds = Fund.objects.all()
-        return render(request, 'utility/list_funds.html', {'funds': funds})
+        context={
+            'funds':Fund.objects.all(),
+            'employeeType':employeeType
+        }
+        return render(request, 'utility/list_funds.html',context)
     except:
         return HttpResponse('no funds yet')
 
@@ -281,8 +281,9 @@ def update_status(request, action, id):
             purchase_request.currentStatus = 1
             purchase_request_log.changedTo = 1
         elif employee.employeeType == 2:
-            stats=get_stats_department(id);
-            if stats['fund_remaining']<stats['fund_required']:
+            deptId=purchase_request.department.id
+            stats=get_stats_department(deptId);
+            if stats['fund remaining']<purchase_request.totalCost:
                 return HttpResponse("Cannot forward due to lack of fund")
             adjust_fund(id, 'grant')
             purchase_request = PurchaseRequest.objects.get(id = id)
@@ -346,3 +347,37 @@ def view_notification(request, id):
         x.seen = 'Y'
         x.save()
     return HttpResponseRedirect(reverse('purchase:view_purchase_request', args=(id,)))
+
+@login_required
+def fund_details_departments(request,deptId='all'):
+    if deptId == 'all':
+        return render(request,'utility/all-department-stats.html')
+    else:
+        return HttpResponse('page not ready')
+
+# A helper view
+@login_required
+def get_stats(request,statType):
+    deptId=request.GET.get('id','all')
+    if statType == 'department_fund':
+        if deptId == 'all':
+            departments=list(Department.objects.all().order_by('id').values('id'))
+            for i in range(len(departments)):
+                departments[i]=departments[i]['id']
+            currentDate=datetime.datetime.now()
+            financialYear=currentDate.year
+            if currentDate.month<4:
+                financialYear-=1
+            funds=Fund.objects.filter(financialYear=financialYear)
+            data=[]
+            for fund in funds:
+                fund_distributions=FundDistribution.objects.filter(fund__id=fund.id).order_by('department_id').values('totalAmountReceived')
+                fund_distributions=list(fund_distributions)
+                for i in range(len(fund_distributions)):
+                    fund_distributions[i]=fund_distributions[i]['totalAmountReceived']
+                data.append(fund_distributions)
+            return JsonResponse({'data':data,'departments':list(departments)})
+        context=get_stats_department(deptId)
+        return JsonResponse(context)
+    else:
+        raise Http404("no stats found")

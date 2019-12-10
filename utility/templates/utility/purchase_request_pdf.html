@@ -74,10 +74,6 @@
         </table>
         <p>g) क्या खरीद सीमित  निविदा / खुली निविदा या एकल निविदा के द्वारा किया जाना प्रस्तावित है/          whether procurement is proposed to be made by limited tender / open tender or single tender:
         </p>
-	<!-- </form> -->
-			<!-- <button>submit and continue</button> -->
-			<!-- <input id='button' type="submit" value= "submit"> -->
-		<!-- </form> -->
 		<br>
 		<br>
 		<p>वित्तीय सहमति /FINANCIAL CONCURRENCE: </p>
@@ -165,31 +161,14 @@
 			</tr>
 		</table>
 		<p>ध्यान देः कृपया अधिक जानकारी के लिए  सस्ंथान की वेबसाइट में अपलोड सस्ंथान की प्रतिनिधिमडंल का अधिकार देखें।/ Note. Pl. refer to the delegation of power of the Institute uploaded in the Institute’s website for further information. </p>
-		<a href="/">.</a>
 	</div>
 	<script type="text/javascript">
-		// const button=document.querySelector('button');
-		const a=document.querySelector('a');
-		a.style.visibility='hidden';
 		window.onload=function(){
 			window.print();
 		}
 		window.addEventListener('afterprint',function(){
-			a.click();
+			window.location.href='/';
 		});
 	</script>
 </body>
 </html>
-
-<!-- <form method="POST">
-    {% csrf_token %}
-    {{form.as_p}}
-    <input type="submit" value="submit">
-</form>
- -->
-<!-- {{ form.non_field_errors }}
-<div class="fieldWrapper">
-    {{ form.subject.errors }}
-    <label for="{{ form.subject.id_for_label }}">Email subject:</label>
-    {{ form.subject }}
-</div>

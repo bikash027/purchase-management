@@ -25,7 +25,7 @@
 		<table style="width: 100%;margin-bottom: 0;">
 			<tr>
 				<td>
-					<p >Amount: {{purchase_request.totalCost}}</p>
+					<p>Amount: <span id='amount'>{{purchase_request.totalCost}}</span></p>
 				</td>
 				<td>
 					<p><a href="{% url 'purchase:print_request' purchase_request.id %}">print request form</a></p>
@@ -46,37 +46,15 @@
 			<div id='button1'><p>stats</p></div>
 			<div id='button2'><p>request status</p></div>
 		</div>
+		<p id='deptId' >{{purchase_request.department.id}}</p>
 		<div id='stats'>
-			<!-- <div class='graph'> -->
-				<div class='dep'>
-					<div class='bar'>
-						
-					</div>
-				</div>
-				<div class='dep'>
-					<div class='bar'>
-						
-					</div>
-				</div>
-				<div class='dep'>
-					<div class='bar'>
-						
-					</div>
-				</div>
-			<!-- </div> -->
-			<div class='graph names'>
-				<div class='barNames'>
-					<p>fund remaining: <span>{{stats.fund_remaining}}</span></p>
-				</div>
-				<div class='barNames'>
-					<p>fund required: <span>{{stats.fund_required}}</span></p>
-				</div>
-				<div class='barNames'>
-					<p>fun required by all: <span>{{stats.fund_required_total}}</span></p>
-				</div>
-			</div>
+			<canvas id="myChart" width="400" height="400"></canvas>
 		</div>
+		{% load static %}
+		<script type="text/javascript" src="{% static 'javascript/Chart.min.js' %}"></script>
+		<script type="text/javascript" src="{% static 'javascript/stats-in-purchase-request.js' %}"></script>
 	{% endif %}
+
 	<div class='dummy'>
 		{% for log in logs %}
 			<div class='Bar'></div>
@@ -84,10 +62,11 @@
 				<p>{{log.changedTo}} {{log.date}}</p>
 				<p>{{log.comment}}</p>
 			</div>
-			
 		{% endfor %}
 	</div>
 	</div>
 	{% load static %}
+	<!-- <script type="text/javascript" src="{% static 'javascript/Chart.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'javascript/stats-in-purchase-request.js' %}"></script> -->
 	<script type="text/javascript" src="{% static 'javascript/view-purchase-request.js' %}"></script>
 {% endblock %}

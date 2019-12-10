@@ -2,25 +2,72 @@
 {% extends 'utility/base.html' %}
 
 {% block content %}
-	<!-- <div id='dashboard'> -->
-	{% if user_type == 'HOD' or user_type == 'FACULTY' %}	
+	{% if user_type == 'FACULTY'%}
+		<div class='general'>
+			<div onclick="location.href='/purchase-request/create';">
+				<span>Create Purchase Request</span>
+			</div>
+			<div onclick="location.href='/purchase-request/employee/view';">
+				<span>My Requests</span>
+			</div>			
+		</div>
+	{% endif %}
+	{% if user_type == 'HOD' %}
 		<div id='grid'>
-			<div onclick="location.href='/purchase-request/create';"><span>Create Purchase Request</span></div>
+			<div onclick="location.href='/purchase-request/create';">
+				<span>Create Purchase Request</span>
+			</div>
 			<div onclick="location.href='/purchase-request/employee/view';">
 				<span>My Requests</span>
 			</div>
-			{% if user_type == 'HOD' %}
-				<div onclick="location.href='/purchase-request/department/view/waiting';"><span>Waiting for approval</span></div>
-				<div onclick="location.href='/purchase-request/department/view/approved';"><span>Approved</span></div>
+			<div onclick="location.href='/purchase-request/department/view/waiting';">
+				<span>Waiting for approval</span>
+			</div>
+			<div onclick="location.href='/purchase-request/department/view/approved';">
+				<span>Approved</span>
+			</div>
+		</div>
+	{% endif %}
+	{% if user_type == 'ACCOUNT' %}
+		<div id='grid'>
+			<div onclick="location.href='/purchase-request/department/view/waiting';">
+				<span>Waiting for approval</span>
+			</div>
+			<div onclick="location.href='/purchase-request/department/view/approved';">
+				<span>Approved</span>
+			</div>
+			<div onclick="location.href='/purchase-request/add_fund';">
+				<span>Add New Fund</span>
+			</div>
+			<div onclick="location.href='/purchase-request/list_funds';" >
+				<span>Show added funds</span>
+			</div>
+			<div onclick="location.href='/purchase-request/department/fund';">
+				<span>Department funds</span>
+			</div>
+		</div>
+	{% endif %}
+	{% if user_type == 'DIRECTOR' or user_type == 'PURCHASE' or user_type == 'REGISTRAR' %}
+		<div class='general'>
+			<div onclick="location.href='/purchase-request/department/view/waiting';">
+				<span>Waiting for approval</span>
+			</div>
+			<div onclick="location.href='/purchase-request/department/view/approved';">
+				<span>Approved</span>
+			</div>
+			{% if user_type == 'DIRECTOR' %}
+				<div onclick="location.href='/purchase-request/list_funds';">
+					<span>Fund Distributions</span>
+				</div>
 			{% endif %}
 		</div>
-
+	{% endif %}
+	{% if user_type == 'FACULTY' or user_type == 'HOD' %}
 		<div class="arrow arrow2"></div>
 		<div id='notbutton'>
 			<span>Notifications</span>
 		</div>
 		<div id='notification' style="position:fixed;background: white; top:60vh; left:10vw; width:14vw;height:35vh; overflow-y:scroll;visibility: hidden;padding-left: 10px;">
-			<!-- <ul> -->
 			{% for description,id,seen in notifications %}
 			<p style=" ">
 				{% if seen == 'Y' %}
@@ -30,26 +77,8 @@
 				{% endif %}
 			</p>
 			{% endfor %}
-			<!-- </ul> -->
 		</div>
 	{% endif %}
-	{% if user_type == 'ACCOUNT' or user_type == 'DIRECTOR' or user_type == 'PURCHASE' or user_type == 'REGISTRAR' %}
-		<div class='general'>
-			<div onclick="location.href='/purchase-request/department/view/waiting';"><span>Waiting for approval</span></div>
-			<div onclick="location.href='/purchase-request/department/view/approved';"><span>Approved</span></div>
-			{% if user_type == 'ACCOUNT' %}
-			<div onclick="location.href='/purchase-request/add_fund';"><span>Add New Fund</span></div>
-			{% endif %}
-			<!-- {% if user_type == ACCOUNT %}
-			<div onclick="location.href='/purchase-request/add_fund';"><span>ADD FUND</span></div>
-			{% endif %} -->
-			{% if user_type == 'DIRECTOR' %}
-			<div onclick="location.href='/purchase-request/list_funds';"><span>Distribute Fund</span></div>
-			{% endif %}
-		</div>
-	{% endif %}
-	<!-- <div></div> -->
-
 	<script type="text/javascript">
 		const button=document.querySelector('#notbutton');
 		const list=document.querySelector('#notification');

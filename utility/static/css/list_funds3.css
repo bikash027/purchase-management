@@ -13,3 +13,11 @@
 	margin:0 auto;
 	/*text-align: center;*/
 }
+#pieChart{
+	width: 40%;
+	margin: 0 auto;
+}
+#stackedBarChart{
+	width: 48%;
+	margin: 0 auto;
+}
