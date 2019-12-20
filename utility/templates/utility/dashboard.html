@@ -3,7 +3,7 @@
 
 {% block content %}
 	{% if user_type == 'FACULTY'%}
-		<div class='general'>
+		<div id='general'>
 			<div onclick="location.href='/purchase-request/create';">
 				<span>Create Purchase Request</span>
 			</div>
@@ -13,42 +13,61 @@
 		</div>
 	{% endif %}
 	{% if user_type == 'HOD' %}
-		<div id='grid'>
-			<div onclick="location.href='/purchase-request/create';">
-				<span>Create Purchase Request</span>
-			</div>
-			<div onclick="location.href='/purchase-request/employee/view';">
+		<div id='five'>
+			<div id='one' onclick="location.href='/purchase-request/employee/view';">
 				<span>My Requests</span>
 			</div>
-			<div onclick="location.href='/purchase-request/department/view/waiting';">
+			<div id='two' onclick="location.href='/purchase-request/create';">
+				<span>Create Purchase Request</span>
+			</div>
+			<div id='three' onclick="location.href='/purchase-request/department/view/approved';">
+				<span>Approved</span>
+			</div>
+			<div id='Four' onclick="location.href='/purchase-request/department/view/waiting';">
 				<span>Waiting for approval</span>
 			</div>
-			<div onclick="location.href='/purchase-request/department/view/approved';">
-				<span>Approved</span>
+			<div id='Five' onclick="location.href='/purchase-request/get_stats/department_fund/?id={{department.id}}';">
+				<span>Department statistics</span>
 			</div>
 		</div>
 	{% endif %}
 	{% if user_type == 'ACCOUNT' %}
-		<div id='grid'>
+		<div id='five'>
+			<div id='one' onclick="location.href='/purchase-request/department/view/approved';">
+				<span>Approved</span>
+			</div>
+			<div id='two' onclick="location.href='/purchase-request/department/view/waiting';">
+				<span>Waiting for approval</span>
+			</div>
+			<div id='three' onclick="location.href='/purchase-request/add_fund';">
+				<span>Add New Fund</span>
+			</div>
+			<div id='Four' onclick="location.href='/purchase-request/list_funds';" >
+				<span>Show added funds</span>
+			</div>
+			<div id='Five' onclick="location.href='/purchase-request/get_stats/department_fund/';">
+				<span>Department funds</span>
+			</div>
+		</div>
+	{% endif %}
+	{% if user_type == 'DIRECTOR' %}
+		<div id='four'>
 			<div onclick="location.href='/purchase-request/department/view/waiting';">
 				<span>Waiting for approval</span>
 			</div>
 			<div onclick="location.href='/purchase-request/department/view/approved';">
 				<span>Approved</span>
 			</div>
-			<div onclick="location.href='/purchase-request/add_fund';">
-				<span>Add New Fund</span>
+			<div onclick="location.href='/purchase-request/list_funds';">
+				<span>Fund Distributions</span>
 			</div>
-			<div onclick="location.href='/purchase-request/list_funds';" >
-				<span>Show added funds</span>
-			</div>
-			<div onclick="location.href='/purchase-request/department/fund';">
+			<div onclick="location.href='/purchase-request/get_stats/department_fund/';">
 				<span>Department funds</span>
 			</div>
 		</div>
 	{% endif %}
-	{% if user_type == 'DIRECTOR' or user_type == 'PURCHASE' or user_type == 'REGISTRAR' %}
-		<div class='general'>
+	{% if user_type == 'PURCHASE' or user_type == 'REGISTRAR' %}
+		<div id='general'>
 			<div onclick="location.href='/purchase-request/department/view/waiting';">
 				<span>Waiting for approval</span>
 			</div>
@@ -63,7 +82,7 @@
 		</div>
 	{% endif %}
 	{% if user_type == 'FACULTY' or user_type == 'HOD' %}
-		<div class="arrow arrow2"></div>
+		<div class="arrow third"></div>
 		<div id='notbutton'>
 			<span>Notifications</span>
 		</div>

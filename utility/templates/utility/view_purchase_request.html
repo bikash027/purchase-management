@@ -22,13 +22,15 @@
             </tr>
 			{{purchase_request.specification | safe}}
 		</table>
-		<table style="width: 100%;margin-bottom: 0;">
+		<table id='amount-and-reprint-form'>
 			<tr>
 				<td>
 					<p>Amount: <span id='amount'>{{purchase_request.totalCost}}</span></p>
 				</td>
 				<td>
-					<p><a href="{% url 'purchase:print_request' purchase_request.id %}">print request form</a></p>
+					{% if canReprint == True %}
+						<p><a href="{% url 'purchase:print_request' purchase_request.id %}">print request form</a></p>
+					{% endif %}
 				</td>
 			</tr>
 		</table>

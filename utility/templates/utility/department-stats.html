@@ -1,0 +1,30 @@
+
+{% extends 'utility/base.html' %}
+
+{% block content %}
+	<div id='stackedBarChart'>
+		<canvas id="myChart" width="400" height="400"></canvas>
+	</div>
+	{% load static %}
+	<script type="text/javascript" src="{% static 'javascript/Chart.min.js' %}"></script>
+	{% if deptId == 'all' %}
+		<script type="text/javascript">
+			const data={{data}};
+			const departments=[{% for department in departments %} '{{department}}',{% endfor %}];
+		</script>
+		{% load static %}
+		<script type="text/javascript" src="{% static 'javascript/chart for all departments.js' %}"></script>
+	{% else %}
+		<script type="text/javascript">
+			const fund_distributions=[{% for distribution in fund_distributions %}
+											{
+												fundUsed: {{distribution.fundUsed}},
+												totalAmountReceived: {{distribution.totalAmountReceived}}
+											},
+									{% endfor %}];
+			const deptId='{{deptId}}';
+		</script>
+		<script type="text/javascript" src="{% static 'javascript/chart for single department.js' %}"></script>
+	{% endif %}
+
+{% endblock %}

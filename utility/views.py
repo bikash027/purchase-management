@@ -73,7 +73,7 @@ def dashboard_view(request):
     notifications = get_all_notifications(employee.id)
     if len(hod) != 0:
         return render(request, 'utility/dashboard.html',
-                      {'user_type': 'HOD', 'notifications': notifications, }
+                      {'user_type': 'HOD', 'notifications': notifications,'department':hod[0].department }
                       )
     else:
         context = {
@@ -110,24 +110,26 @@ def view_purchase_request_department(request, w_or_a='waiting'):
 def view_purchase_request(request, id):
     try:
         purchase_request = PurchaseRequest.objects.get(id=id)
-        user = purchase_request.employee.user
-        employee_name = user.first_name + " " + user.last_name
-        status = dict(PURCHASE_STATUS).get(purchase_request.currentStatus)
-        ar = get_request_logs(id)
-        context = {'purchase_request': purchase_request,
-                   'employee_name': employee_name,
-                   'status': status,
-                   'logs': ar,
-                   'ForwardReject': False,
-                   'accounts': False}
-        if requiresForward(id, request.user.id) == True:
-            context['ForwardReject'] = True
-            if Employee.objects.get(user__id=request.user.id).employeeType == 2:
-                context['accounts'] = True
-            return render(request, 'utility/view_purchase_request.html', context)
-        return render(request, 'utility/view_purchase_request.html', context)
     except:
         raise Http404("No such purchase request exists")
+    user = purchase_request.employee.user
+    employee_name = user.first_name + " " + user.last_name
+    status = dict(PURCHASE_STATUS).get(purchase_request.currentStatus)
+    ar = get_request_logs(id)
+    context = {'purchase_request': purchase_request,
+               'employee_name': employee_name,
+               'status': status,
+               'logs': ar,
+               'ForwardReject': False,
+               'accounts': False,
+               'canReprint': False}
+    if requiresForward(id, request.user.id) == True:
+        context['ForwardReject'] = True
+        if Employee.objects.get(user__id=request.user.id).employeeType == 2:
+            context['accounts'] = True
+    if user.id == request.user.id:
+        context['canReprint'] = True
+    return render(request, 'utility/view_purchase_request.html', context)
 
 
 def adjust_fund(pid, action):
@@ -348,35 +350,36 @@ def view_notification(request, id):
         x.save()
     return HttpResponseRedirect(reverse('purchase:view_purchase_request', args=(id,)))
 
-@login_required
-def fund_details_departments(request,deptId='all'):
-    if deptId == 'all':
-        return render(request,'utility/all-department-stats.html')
-    else:
-        return HttpResponse('page not ready')
 
-# A helper view
 @login_required
 def get_stats(request,statType):
     deptId=request.GET.get('id','all')
     if statType == 'department_fund':
+        currentDate=datetime.datetime.now()
+        financialYear=currentDate.year
+        if currentDate.month<4:
+            financialYear-=1
+        funds=Fund.objects.filter(financialYear=financialYear)
+
         if deptId == 'all':
             departments=list(Department.objects.all().order_by('id').values('id'))
             for i in range(len(departments)):
                 departments[i]=departments[i]['id']
-            currentDate=datetime.datetime.now()
-            financialYear=currentDate.year
-            if currentDate.month<4:
-                financialYear-=1
-            funds=Fund.objects.filter(financialYear=financialYear)
             data=[]
             for fund in funds:
-                fund_distributions=FundDistribution.objects.filter(fund__id=fund.id).order_by('department_id').values('totalAmountReceived')
+                fund_distributions=FundDistribution.objects.filter(fund_id=fund.id).order_by('department_id').values('totalAmountReceived')
                 fund_distributions=list(fund_distributions)
                 for i in range(len(fund_distributions)):
                     fund_distributions[i]=fund_distributions[i]['totalAmountReceived']
                 data.append(fund_distributions)
-            return JsonResponse({'data':data,'departments':list(departments)})
+            return render(request,'utility/department-stats.html',{'deptId': deptId,'data':data,'departments':departments})
+
+        funds=funds.values('id')
+        fund_distributions=FundDistribution.objects.filter(department_id=deptId)
+        fund_distributions=fund_distributions.filter(fund_id__in=funds)
+        return render(request,'utility/department-stats.html',{'deptId':deptId,'fund_distributions':fund_distributions})
+
+    elif statType == 'department_fund_summary':
         context=get_stats_department(deptId)
         return JsonResponse(context)
     else:

@@ -50,4 +50,4 @@ function formChart(fundData){
         document.getElementById('forward').lastElementChild.style.display='none';
     }
 }
-httpGetAsync("/purchase-request/get_stats/department_fund?id="+deptId,formChart);
+httpGetAsync("/purchase-request/get_stats/department_fund_summary?id="+deptId,formChart);

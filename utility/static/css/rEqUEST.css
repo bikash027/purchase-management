@@ -117,13 +117,7 @@ a{
 	transform: scale(1.02);
 }
 
-/*.graph{*/
-	/*height:400px;*/
-	/*width:80%;*/
-	/*border-left: 1px solid black;*/
-	/*border-bottom:1px solid black;*/
-	/*margin:0 auto;*/
-/*}*/
+
 #requestContainer .names{
 	height:auto;
 }
@@ -156,4 +150,11 @@ a{
 }
 #deptId{
 	display:none;
+}
+#amount-and-reprint-form{
+	width: 100%;
+	margin-bottom: 0;
+}
+#amount-and-reprint-form td{
+	width:50%;
 }

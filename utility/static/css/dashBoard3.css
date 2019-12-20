@@ -1,18 +1,25 @@
 
-#grid{
+#four{
 	width:60%;
 	/*margin:0 auto;*/
 	/*margin-top: 20vh;*/
 	border-top:20vh solid transparent;
 	margin-left: 25%;
 }
-.general{
+#general{
 	width:30%;
 	margin:0 auto;
 	border-top:5vh solid transparent;
 	/*margin-top:10vh;*/
 }
- #grid div, .general div{
+#five{
+	width: 75vw;
+	height: 93vh;
+	margin: 0 auto;;
+	border-top: 5vh solid transparent;
+	position : relative;
+}
+ #four div, #general div, #five div{
  	font-family: 'Roboto Condensed';
 	color:var(--word);
 	background-color: var(--primary);
@@ -31,23 +38,55 @@
 	padding-left: 5px;
 	padding-right: 5px;
 	text-align: center;
-	position:relative;
+	position:absolute;
 	transform: scale(1);
 	transition-property: transform;
 }
- .general div{
+ #general div{
 	width:95%;
 	height:29vh;
 }
- #grid div:hover, .general div:hover{
+ #four div:hover, #general div:hover, #five div:hover{
 	transform: scale(1.01);
 }
- #grid div span, .general div span{
+ #four div span, #general div span, #five div span{
 	display: inline-block;
 	width:100%;
 	position:relative;
 	top:50%;
 	transform: translate(0%,-50%);
+}
+#five #one{
+	width: 23.5%;
+	height: 73%;
+}
+#five #two{
+	/*top: 0;*/
+	left: 25%;
+	width: 73%;
+	height: 23%;
+}
+#five #three{
+	left: 75%;
+	top: 25%;
+	width: 23%;
+	height: 73%;
+}
+#five #Four{
+	left: 0;
+	top: 75%;
+	width: 73.5%;
+	height: 23%;
+}
+#five #Five{
+	left: 25%;
+	top: 25%;
+	width: 48.5%;
+	height: 48%;
+}
+#five div{
+	box-sizing: border-box;
+	border-width: 0 0;
 }
 .nav{
 	width:8vw;
@@ -73,24 +112,23 @@
 	transform: translate(0%,-50%);
 }
 .arrow{
-	position:absolute;
-	/*background-color: white;*/
+	position:fixed;
 	top:30vh;
 	left:9vw;
 	border-left: 1vw solid var(--primary);
 	border-top:5vh solid transparent;
-	/*var(--background);*/
 	border-bottom:5vh solid transparent;
-	/*var(--background);*/
 }
 .second{
 	top:45vh;
+}
+.third{
+	top:60vh;
 }
 #notbutton{
 	font-family: 'Roboto Condensed';
 	background-color: var(--primary);
 	color:var(--word);
-	/*rgb(8,27,54)*/
 	position:fixed;
 	top:60vh;
 	left:0vw;
@@ -104,6 +142,4 @@
 	top:50%;
 	transform: translate(0%,-50%);
 }
-.arrow2{
-	top:60vh;
-}
+
