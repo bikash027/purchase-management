@@ -1,8 +1,6 @@
 
 #four{
 	width:60%;
-	/*margin:0 auto;*/
-	/*margin-top: 20vh;*/
 	border-top:20vh solid transparent;
 	margin-left: 25%;
 }
@@ -10,7 +8,6 @@
 	width:30%;
 	margin:0 auto;
 	border-top:5vh solid transparent;
-	/*margin-top:10vh;*/
 }
 #five{
 	width: 75vw;
@@ -45,7 +42,12 @@
  #general div{
 	width:95%;
 	height:29vh;
+	position: relative;
 }
+#four div{
+	position: relative;
+}
+
  #four div:hover, #general div:hover, #five div:hover{
 	transform: scale(1.01);
 }
